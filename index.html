@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>🏋️‍♂️ LevelFit - Treino em Jogo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif; }
+        body { background: #0b0e14; color: #eee; min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding: 16px; }
+        #app { max-width: 480px; width: 100%; background: #141a24; border-radius: 32px; padding: 20px 16px 30px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); position: relative; border: 1px solid #2a3344; }
+
+        .tela { display: none; animation: fadeIn 0.3s ease; }
+        .tela.ativa { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn { background: #2a3a55; border: none; color: #fff; padding: 12px 18px; border-radius: 60px; font-weight: 600; font-size: 16px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 0 #0f1722; display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; border: 1px solid #3e5270; }
+        .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #0f1722; }
+        .btn-primary { background: #6c5ce7; border-color: #8b7cf7; }
+        .btn-success { background: #00b894; border-color: #00d2a0; }
+        .btn-danger { background: #e17055; border-color: #ff8a7a; }
+        .btn-warning { background: #fdcb6e; color: #1e272e; border-color: #ffeaa7; }
+        .btn-gold { background: linear-gradient(135deg, #fdcb6e, #e17055); border-color: #ffeaa7; color: #1e272e; }
+        .btn-outline { background: transparent; border: 2px solid #4a5a7a; box-shadow: none; }
+        .btn-outline:active { transform: none; box-shadow: none; }
+        .btn-pequeno { padding: 6px 14px; font-size: 13px; width: auto; }
+        .btn:disabled { opacity: 0.5; transform: translateY(0); box-shadow: 0 4px 0 #0f1722; pointer-events: none; }
+
+        .tab-bar { display: flex; gap: 4px; background: #1e2634; padding: 6px; border-radius: 60px; margin-bottom: 18px; border: 1px solid #2a3344; overflow-x: auto; }
+        .tab-bar::-webkit-scrollbar { height: 0; }
+        .tab { flex: 1; background: transparent; border: none; color: #8a9bb5; padding: 10px 10px; border-radius: 60px; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; }
+        .tab.ativa { background: #6c5ce7; color: #fff; box-shadow: 0 3px 0 #4a3fb0; }
+        .tab.premium-tab.ativa { background: linear-gradient(135deg, #fdcb6e, #e17055); color: #1e272e; box-shadow: 0 3px 0 #a06b1c; }
+        .tab.personal-tab.ativa { background: linear-gradient(135deg, #00b894, #00cec9); color: #fff; box-shadow: 0 3px 0 #007d65; }
+
+        #tela-cadastro { text-align: center; padding: 10px 0; }
+        #tela-cadastro h1 { font-size: 32px; margin-bottom: 4px; background: linear-gradient(135deg, #fdcb6e, #e17055); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+        #tela-cadastro .sub { color: #8a9bb5; margin-bottom: 24px; font-size: 14px; }
+        .campo { margin-bottom: 18px; text-align: left; }
+        .campo label { display: block; font-size: 13px; font-weight: 600; color: #a0b3d0; margin-bottom: 4px; }
+        .campo input, .campo select { width: 100%; padding: 14px 16px; border-radius: 16px; border: 2px solid #2a3344; background: #1e2634; color: #fff; font-size: 16px; outline: none; transition: 0.2s; }
+        .campo input:focus, .campo select:focus { border-color: #6c5ce7; background: #252f40; }
+        .campo select option { background: #1e2634; }
+        .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
+        .radio-group label { flex: 1; min-width: 80px; background: #1e2634; padding: 12px 8px; border-radius: 16px; text-align: center; border: 2px solid #2a3344; cursor: pointer; font-weight: 500; color: #b0c4e0; transition: 0.2s; }
+        .radio-group input[type="radio"] { display: none; }
+        .radio-group input[type="radio"]:checked+span { color: #fff; }
+        .radio-group input[type="radio"]:checked~.radio-label { border-color: #6c5ce7; background: #2a3a55; }
+        .radio-label { display: block; }
+
+        .header-dash { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .user-info { display: flex; align-items: center; gap: 12px; }
+        .user-avatar { width: 52px; height: 52px; border-radius: 50%; background: #2a3a55; display: flex; align-items: center; justify-content: center; font-size: 32px; border: 3px solid #6c5ce7; }
+        .user-name { font-weight: 700; font-size: 18px; }
+        .user-level { font-size: 13px; color: #8a9bb5; }
+        .btn-config { background: #1e2634; border: none; color: #a0b3d0; font-size: 24px; padding: 4px 10px; border-radius: 40px; cursor: pointer; }
+
+        .avatar-grande { text-align: center; margin: 6px 0 10px; }
+        .avatar-grande .emoji { font-size: 80px; display: inline-block; background: #1e2634; padding: 16px 24px; border-radius: 60px; border: 3px solid #2a3344; line-height: 1; transition: 0.3s; }
+        .avatar-grande .titulo-nivel { font-size: 22px; font-weight: 800; margin-top: 2px; background: linear-gradient(135deg, #fdcb6e, #e17055); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .avatar-grande .xp-info { font-size: 14px; color: #8a9bb5; }
+
+        .progresso-container { background: #1e2634; border-radius: 60px; height: 16px; overflow: hidden; margin: 10px 0 4px; border: 1px solid #2a3344; }
+        .progresso-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #6c5ce7, #a29bfe); border-radius: 60px; transition: width 0.4s ease; }
+        .progresso-label { display: flex; justify-content: space-between; font-size: 12px; color: #8a9bb5; margin-bottom: 14px; }
+
+        .secao-titulo { font-size: 18px; font-weight: 700; margin: 20px 0 12px; display: flex; align-items: center; gap: 8px; }
+        .missao-item { background: #1e2634; border-radius: 16px; padding: 14px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #6c5ce7; transition: 0.2s; }
+        .missao-item.concluida { opacity: 0.5; border-left-color: #00b894; }
+        .missao-item .info { flex: 1; }
+        .missao-item .nome { font-weight: 600; }
+        .missao-item .desc { font-size: 13px; color: #8a9bb5; }
+        .missao-item .xp-badge { background: #2a3a55; padding: 4px 12px; border-radius: 40px; font-size: 13px; font-weight: 600; color: #fdcb6e; }
+        .missao-item .btn { width: auto; padding: 6px 16px; font-size: 13px; margin-left: 8px; }
+
+        .acoes-rapidas { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 10px 0 16px; }
+        .acoes-rapidas .btn { padding: 10px 6px; font-size: 13px; border-radius: 20px; }
+
+        .conquista-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+        .conquista-item { background: #1e2634; border-radius: 40px; padding: 6px 16px 6px 10px; display: flex; align-items: center; gap: 6px; font-size: 13px; border: 1px solid #2a3344; }
+        .conquista-item.bloqueada { opacity: 0.3; filter: grayscale(1); }
+        .conquista-item .emoji { font-size: 18px; }
+
+        .ranking-lista { background: #1e2634; border-radius: 16px; overflow: hidden; margin-top: 6px; }
+        .ranking-item { display: flex; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #2a3344; font-size: 14px; }
+        .ranking-item:last-child { border-bottom: none; }
+        .ranking-item .pos { font-weight: 700; color: #6c5ce7; width: 30px; }
+        .ranking-item .nome { flex: 1; margin-left: 8px; }
+        .ranking-item .nivel { color: #fdcb6e; font-weight: 600; }
+        .ranking-item.destacado { background: #2a3a55; border-left: 4px solid #fdcb6e; }
+
+        .treino-header { background: linear-gradient(135deg, #2d1b4e, #1e2634); border: 2px solid #6c5ce7; border-radius: 20px; padding: 16px; margin-bottom: 16px; }
+        .treino-header h2 { font-size: 20px; margin-bottom: 4px; }
+        .treino-header p { font-size: 13px; color: #b0c4e0; }
+        .treino-header .objetivo-tag { display: inline-block; margin-top: 8px; background: #6c5ce7; color: #fff; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 4px 12px; border-radius: 40px; letter-spacing: 0.5px; }
+
+        .dia-selector { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 14px; -webkit-overflow-scrolling: touch; }
+        .dia-selector::-webkit-scrollbar { height: 4px; }
+        .dia-chip { background: #1e2634; border: 2px solid #2a3344; color: #a0b3d0; padding: 8px 14px; border-radius: 60px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; flex-shrink: 0; }
+        .dia-chip.ativo { background: #2a3a55; border-color: #6c5ce7; color: #fff; }
+
+        .exercicio-item { background: #1e2634; border-radius: 16px; padding: 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; border-left: 4px solid #6c5ce7; cursor: pointer; transition: 0.2s; user-select: none; }
+        .exercicio-item:active { transform: scale(0.99); }
+        .exercicio-item.feito { opacity: 0.65; border-left-color: #00b894; }
+        .exercicio-item.feito .ex-nome { text-decoration: line-through; color: #8a9bb5; }
+        .ex-emoji { font-size: 26px; width: 46px; height: 46px; background: #141a24; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .ex-info { flex: 1; min-width: 0; }
+        .ex-nome { font-weight: 700; font-size: 15px; }
+        .ex-detalhes { font-size: 12px; color: #8a9bb5; margin-top: 3px; }
+        .ex-check { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #4a5a7a; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; flex-shrink: 0; transition: 0.2s; font-size: 14px; }
+        .exercicio-item.feito .ex-check { background: #00b894; border-color: #00d2a0; }
+
+        .treino-progress { margin-bottom: 16px; }
+        .treino-progress .bar { background: #1e2634; height: 12px; border-radius: 60px; overflow: hidden; border: 1px solid #2a3344; }
+        .treino-progress .bar-fill { height: 100%; background: linear-gradient(90deg, #00b894, #00d2a0); width: 0%; transition: width 0.3s ease; }
+        .treino-progress .label { display: flex; justify-content: space-between; font-size: 12px; color: #8a9bb5; margin-bottom: 6px; }
+
+        /* PREMIUM */
+        .premium-banner { background: linear-gradient(135deg, #2d1b4e, #4a2c7a); border: 2px solid #fdcb6e; border-radius: 20px; padding: 18px; margin-bottom: 16px; text-align: center; position: relative; overflow: hidden; }
+        .premium-banner::before { content: '⭐'; position: absolute; top: -10px; right: -10px; font-size: 80px; opacity: 0.1; }
+        .premium-banner h2 { font-size: 22px; color: #fdcb6e; margin-bottom: 6px; }
+        .premium-banner p { font-size: 13px; color: #d0c4f0; }
+        .premium-badge-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+        .premium-badge { background: rgba(253, 203, 110, 0.15); color: #fdcb6e; border: 1px solid #fdcb6e; border-radius: 40px; padding: 4px 12px; font-size: 11px; font-weight: 700; }
+
+        .card-premium { background: #1e2634; border-radius: 16px; padding: 16px; margin-bottom: 12px; border-left: 4px solid #fdcb6e; }
+        .card-premium .card-titulo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+        .card-premium .card-titulo .emoji { font-size: 22px; }
+        .card-premium .card-desc { font-size: 13px; color: #8a9bb5; margin-bottom: 10px; }
+        .card-premium .card-itens { list-style: none; }
+        .card-premium .card-itens li { font-size: 13px; color: #c8d4e6; padding: 6px 0; border-bottom: 1px solid #2a3344; display: flex; align-items: center; gap: 8px; }
+        .card-premium .card-itens li:last-child { border-bottom: none; }
+
+        /* PERSONAL */
+        .personal-banner { background: linear-gradient(135deg, #0a4a3a, #1a7a60); border: 2px solid #00d2a0; border-radius: 20px; padding: 18px; margin-bottom: 16px; text-align: center; position: relative; overflow: hidden; }
+        .personal-banner::before { content: '🏋️'; position: absolute; top: -10px; right: -10px; font-size: 80px; opacity: 0.1; }
+        .personal-banner h2 { font-size: 22px; color: #00d2a0; margin-bottom: 6px; }
+        .personal-banner p { font-size: 13px; color: #b8f0dc; }
+
+        .trainer-card { background: #1e2634; border-radius: 20px; padding: 16px; margin-bottom: 12px; border: 2px solid #2a3344; display: flex; align-items: center; gap: 14px; }
+        .trainer-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #00b894, #00cec9); display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; border: 3px solid #00d2a0; }
+        .trainer-info { flex: 1; }
+        .trainer-info .nome { font-weight: 700; font-size: 16px; }
+        .trainer-info .especialidade { font-size: 12px; color: #8a9bb5; margin-top: 2px; }
+        .trainer-info .status { font-size: 11px; color: #00d2a0; font-weight: 700; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+        .trainer-info .status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #00d2a0; box-shadow: 0 0 8px #00d2a0; }
+
+        .chat-box { background: #1e2634; border-radius: 16px; padding: 16px; margin-bottom: 12px; border: 1px solid #2a3344; }
+        .chat-box .chat-titulo { font-size: 13px; color: #8a9bb5; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .msg { display: flex; gap: 10px; margin-bottom: 12px; }
+        .msg.meu { flex-direction: row-reverse; }
+        .msg .bolha { background: #2a3a55; padding: 10px 14px; border-radius: 16px; font-size: 13px; max-width: 80%; }
+        .msg.meu .bolha { background: #00b894; color: #fff; }
+        .msg .msg-avatar { width: 32px; height: 32px; border-radius: 50%; background: #141a24; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+
+        .plano-personal-item { background: #1e2634; border-radius: 16px; padding: 14px; margin-bottom: 10px; border-left: 4px solid #00d2a0; }
+        .plano-personal-item .titulo { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+        .plano-personal-item .desc { font-size: 12px; color: #8a9bb5; }
+
+        /* MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
+        .modal-overlay.ativo { display: flex; }
+        .modal-box { background: #141a24; border-radius: 32px; padding: 28px 24px; max-width: 400px; width: 100%; border: 1px solid #2a3344; max-height: 80vh; overflow-y: auto; }
+        .modal-box h2 { margin-bottom: 12px; }
+        .modal-box .btn { margin-top: 12px; }
+
+        .config-opcoes { display: flex; flex-direction: column; gap: 12px; margin: 10px 0; }
+        .config-opcoes label { display: flex; align-items: center; gap: 12px; font-size: 16px; cursor: pointer; }
+        .config-opcoes input[type="checkbox"] { width: 20px; height: 20px; accent-color: #6c5ce7; }
+
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e2634; color: #fff; padding: 12px 24px; border-radius: 60px; border: 1px solid #2a3344; font-weight: 600; z-index: 9999; display: none; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); animation: toastAnim 0.3s ease; max-width: 90vw; text-align: center; }
+        .toast.mostrar { display: block; }
+        @keyframes toastAnim { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+        .text-center { text-align: center; }
+        .mt-8 { margin-top: 8px; }
+        .mb-8 { margin-bottom: 8px; }
+        .flex { display: flex; gap: 8px; }
+        .gap-4 { gap: 4px; }
+        .w-full { width: 100%; }
+        .opcao-premium { background: linear-gradient(135deg, #2d1b4e, #1e2634); border: 2px solid #6c5ce7; border-radius: 20px; padding: 16px; margin: 12px 0; text-align: center; }
+        .opcao-premium .preco { font-size: 24px; font-weight: 800; color: #fdcb6e; }
+        .badge { background: #e17055; color: #fff; border-radius: 40px; padding: 2px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; display: inline-block; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1e2634; }
+        ::-webkit-scrollbar-thumb { background: #2a3a55; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+
+        <div id="toast" class="toast"></div>
+
+        <div class="tab-bar" id="tab-bar" style="display:none;">
+            <button class="tab ativa" data-tab="dash">🏠 Início</button>
+            <button class="tab" data-tab="treino">🏋️ Treino</button>
+            <button class="tab premium-tab" data-tab="premium" id="tab-premium" style="display:none;">⭐ Premium</button>
+            <button class="tab personal-tab" data-tab="personal" id="tab-personal" style="display:none;">🧑‍🏫 Personal</button>
+        </div>
+
+        <div id="tela-cadastro" class="tela ativa">
+            <h1>⚡ LevelFit</h1>
+            <div class="sub">Treinar virou jogo</div>
+
+            <div class="campo">
+                <label>👤 Seu nome</label>
+                <input type="text" id="input-nome" placeholder="Digite seu nome" value="Jogador">
+            </div>
+            <div class="campo">
+                <label>🎯 Objetivo principal</label>
+                <select id="input-objetivo">
+                    <option value="emagrecer">🔥 Emagrecer</option>
+                    <option value="massa">💪 Ganhar massa</option>
+                    <option value="saude">🧘 Manter saúde</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label>📅 Faixa etária</label>
+                <select id="input-idade">
+                    <option value="16-25">16 – 25 anos</option>
+                    <option value="26-30">26 – 30 anos</option>
+                    <option value="31-45">31 – 45 anos</option>
+                    <option value="45+">Acima de 45</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label>🎮 Estilo do app</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="estilo" value="animado" checked>
+                        <span class="radio-label">🔥 Animado<br><small>zoeira e cores</small></span>
+                    </label>
+                    <label>
+                        <input type="radio" name="estilo" value="serio">
+                        <span class="radio-label">🧘 Sério<br><small>foco e saúde</small></span>
+                    </label>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="btn-cadastrar">🚀 Começar missão</button>
+        </div>
+
+        <div id="tela-dash" class="tela">
+
+            <div class="header-dash">
+                <div class="user-info">
+                    <div class="user-avatar" id="avatar-mini">🐣</div>
+                    <div>
+                        <div class="user-name" id="dash-nome">Jogador</div>
+                        <div class="user-level" id="dash-nivel-label">Nível 1 • Iniciante</div>
+                    </div>
+                </div>
+                <button class="btn-config" id="btn-abrir-config">⚙️</button>
+            </div>
+
+            <div class="avatar-grande">
+                <div class="emoji" id="avatar-emoji">🐣</div>
+                <div class="titulo-nivel" id="dash-titulo-nivel">🐔 Frango Assustado</div>
+                <div class="xp-info" id="dash-xp-info">0 XP · Próximo nível: 100 XP</div>
+            </div>
+
+            <div class="progresso-container">
+                <div class="progresso-bar" id="progresso-bar" style="width:0%"></div>
+            </div>
+            <div class="progresso-label">
+                <span id="progresso-atual">0</span>
+                <span id="progresso-max">100</span>
+            </div>
+
+            <div class="acoes-rapidas">
+                <button class="btn btn-success btn-pequeno" data-acao="agua">💧 Água</button>
+                <button class="btn btn-warning btn-pequeno" data-acao="login">📅 Login</button>
+                <button class="btn btn-danger btn-pequeno" data-acao="treino">🏋️ Treino</button>
+            </div>
+
+            <div class="secao-titulo">📋 Missões diárias</div>
+            <div id="lista-missoes"></div>
+
+            <div class="secao-titulo">🏆 Conquistas</div>
+            <div class="conquista-grid" id="lista-conquistas"></div>
+
+            <div class="secao-titulo">👥 Ranking dos amigos</div>
+            <div class="ranking-lista" id="lista-ranking"></div>
+
+            <div style="margin-top:20px; display:flex; gap:10px;">
+                <button class="btn btn-outline" id="btn-premium">⭐ Plano Premium</button>
+                <button class="btn btn-outline" id="btn-personal">🧑‍🏫 Personal Trainer</button>
+            </div>
+
+            <div style="text-align:center; margin-top:20px; font-size:12px; color:#4a5a7a;">
+                LevelFit v1.0 • Treino é jogo
+            </div>
+        </div>
+
+        <div id="tela-treino" class="tela">
+
+            <div class="treino-header">
+                <h2 id="treino-titulo">🔥 Queima Total</h2>
+                <p id="treino-desc">Foco em queimar gordura com circuitos intensos</p>
+                <span class="objetivo-tag" id="treino-tag">Objetivo: Emagrecer</span>
+            </div>
+
+            <div class="dia-selector" id="treino-dias"></div>
+
+            <div class="treino-progress">
+                <div class="label">
+                    <span>Progresso do treino</span>
+                    <span id="treino-progress-text">0/0</span>
+                </div>
+                <div class="bar">
+                    <div class="bar-fill" id="treino-progress-fill"></div>
+                </div>
+            </div>
+
+            <div id="treino-exercicios"></div>
+
+            <button class="btn btn-success" id="btn-finalizar-treino" style="margin-top:16px;">🏁 Finalizar treino</button>
+
+            <div style="text-align:center; margin-top:16px; font-size:12px; color:#4a5a7a;">
+                Toque nos exercícios para marcar como feitos
+            </div>
+        </div>
+
+        <!-- TELA PREMIUM -->
+        <div id="tela-premium" class="tela">
+
+            <div class="premium-banner">
+                <h2>⭐ Membro Premium</h2>
+                <p>Sua assinatura está ativa. Aproveite tudo!</p>
+                <div class="premium-badge-row">
+                    <span class="premium-badge">R$ 29,90/mês</span>
+                    <span class="premium-badge">✓ Ativo</span>
+                </div>
+            </div>
+
+            <div class="secao-titulo">🔥 Treinos Exclusivos</div>
+
+            <div class="card-premium">
+                <div class="card-titulo"><span class="emoji">💥</span> HIIT Extremo</div>
+                <div class="card-desc">Circuito avançado de 25 minutos para queima máxima</div>
+                <ul class="card-itens">
+                    <li>🏃 Sprint intervalado — 8x 30s</li>
+                    <li>💥 Burpee explosivo — 5x 12 reps</li>
+                    <li>🦵 Agachamento com salto — 5x 15 reps</li>
+                    <li>🧗 Mountain climber — 5x 40s</li>
+                </ul>
+            </div>
+
+            <div class="card-premium">
+                <div class="card-titulo"><span class="emoji">🦍</span> Força Bruta</div>
+                <div class="card-desc">Protocolo de força e hipertrofia nível avançado</div>
+                <ul class="card-itens">
+                    <li>🏋️ Levantamento terra — 5x 5 reps</li>
+                    <li>💪 Supino pesado — 5x 5 reps</li>
+                    <li>🦵 Agachamento profundo — 5x 5 reps</li>
+                    <li>🧗 Barra fixa — 4x até falha</li>
+                </ul>
+            </div>
+
+            <div class="secao-titulo">🥗 Planos Alimentares</div>
+
+            <div class="card-premium">
+                <div class="card-titulo"><span class="emoji">🍽️</span> Dieta para Emagrecer</div>
+                <div class="card-desc">Cardápio semanal de 1800 kcal com déficit controlado</div>
+                <ul class="card-itens">
+                    <li>☕ Café da manhã — 350 kcal</li>
+                    <li>🥗 Almoço — 600 kcal</li>
+                    <li>🍎 Lanche — 250 kcal</li>
+                    <li>🍲 Jantar — 600 kcal</li>
+                </ul>
+            </div>
+
+            <div class="card-premium">
+                <div class="card-titulo"><span class="emoji">🥩</span> Dieta para Ganho de Massa</div>
+                <div class="card-desc">Cardápio hipercalórico de 3200 kcal</div>
+                <ul class="card-itens">
+                    <li>🥚 Café — 700 kcal</li>
+                    <li>🍗 Almoço — 900 kcal</li>
+                    <li>🥜 Pré-treino — 500 kcal</li>
+                    <li>🍝 Jantar — 800 kcal</li>
+                    <li>🥛 Ceia — 300 kcal</li>
+                </ul>
+            </div>
+
+            <div class="secao-titulo">📊 Análise Corporal</div>
+            <div class="card-premium">
+                <div class="card-titulo"><span class="emoji">📏</span> Medidas & Evolução</div>
+                <div class="card-desc">Acompanhe peso, medidas e percentual de gordura</div>
+                <ul class="card-itens">
+                    <li>⚖️ Peso atual: — kg</li>
+                    <li>📏 Cintura: — cm</li>
+                    <li>💪 Braço: — cm</li>
+                    <li>🦵 Coxa: — cm</li>
+                </ul>
+            </div>
+
+            <button class="btn btn-outline" id="btn-cancelar-premium" style="margin-top:20px;">Cancelar assinatura</button>
+        </div>
+
+        <!-- TELA PERSONAL -->
+        <div id="tela-personal" class="tela">
+
+            <div class="personal-banner">
+                <h2>🧑‍🏫 Acompanhamento Ativo</h2>
+                <p>Seu personal trainer está cuidando de você!</p>
+            </div>
+
+            <div class="secao-titulo">👨‍💼 Seu Personal</div>
+
+            <div class="trainer-card">
+                <div class="trainer-avatar">🧑‍🏫</div>
+                <div class="trainer-info">
+                    <div class="nome">Coach Ricardo</div>
+                    <div class="especialidade">Hipertrofia • Emagrecimento • Funcional</div>
+                    <div class="status">Online agora</div>
+                </div>
+            </div>
+
+            <div class="secao-titulo">💬 Conversas</div>
+
+            <div class="chat-box">
+                <div class="chat-titulo">Coach Ricardo</div>
+                <div class="msg">
+                    <div class="msg-avatar">🧑‍🏫</div>
+                    <div class="bolha">Fala campeão! Bora ajustar seu treino dessa semana? Vi que você tá indo bem nos agachamentos 💪</div>
+                </div>
+                <div class="msg meu">
+                    <div class="msg-avatar">🐣</div>
+                    <div class="bolha">Bora! Tô sentindo evolução já 🔥</div>
+                </div>
+                <div class="msg">
+                    <div class="msg-avatar">🧑‍🏫</div>
+                    <div class="bolha">Show! Vou aumentar a carga em 5kg no agachamento e no leg press. Mantém a dieta que tá voando ✈️</div>
+                </div>
+            </div>
+
+            <div class="secao-titulo">📋 Plano Personalizado</div>
+
+            <div class="plano-personal-item">
+                <div class="titulo">🔥 Treino Personalizado — Semana Atual</div>
+                <div class="desc">Ajustado especificamente para você pelo Coach Ricardo</div>
+            </div>
+
+            <div class="plano-personal-item">
+                <div class="titulo">🥗 Ajuste Nutricional</div>
+                <div class="desc">Aumento de proteína para 2.0g/kg com base no seu objetivo</div>
+            </div>
+
+            <div class="plano-personal-item">
+                <div class="titulo">📊 Check-in Semanal</div>
+                <div class="desc">Próximo check-in: em 3 dias</div>
+            </div>
+
+            <div class="plano-personal-item">
+                <div class="titulo">🎯 Meta Próximo Mês</div>
+                <div class="desc">+3kg de massa magra com -2% de gordura</div>
+            </div>
+
+            <button class="btn btn-outline" id="btn-cancelar-personal" style="margin-top:20px;">Cancelar acompanhamento</button>
+        </div>
+
+        <div class="modal-overlay" id="modal-config">
+            <div class="modal-box">
+                <h2>⚙️ Configurações</h2>
+                <div class="config-opcoes">
+                    <label>
+                        <input type="checkbox" id="chk-modo-serio">
+                        Modo sério (desativa zoeira nos títulos)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="chk-notificacoes" checked>
+                        Notificações
+                    </label>
+                </div>
+                <button class="btn btn-primary" id="btn-fechar-config">Salvar e fechar</button>
+                <button class="btn btn-danger" id="btn-resetar" style="margin-top:8px;">🔄 Resetar progresso</button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-premium">
+            <div class="modal-box">
+                <h2>⭐ Plano Premium</h2>
+                <p style="color:#8a9bb5; margin-bottom:12px;">Acesse treinos exclusivos, dietas e planos personalizados.</p>
+                <div class="opcao-premium">
+                    <div class="preco">R$ 29,90 <span style="font-size:14px; color:#8a9bb5;">/mês</span></div>
+                    <div style="font-size:13px; color:#b0c4e0;">Treinos avançados • Dietas • Consultoria</div>
+                </div>
+                <button class="btn btn-success" id="btn-assinar">🔥 Assinar agora</button>
+                <button class="btn btn-outline" id="btn-fechar-premium">Fechar</button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-personal">
+            <div class="modal-box">
+                <h2>🧑‍🏫 Personal Trainer</h2>
+                <p style="color:#8a9bb5; margin-bottom:12px;">Contrate um profissional para te acompanhar.</p>
+                <div class="opcao-premium">
+                    <div class="preco">R$ 79,90 <span style="font-size:14px; color:#8a9bb5;">/mês</span></div>
+                    <div style="font-size:13px; color:#b0c4e0;">Acompanhamento 1:1 • Planos exclusivos</div>
+                </div>
+                <button class="btn btn-success" id="btn-contratar">💪 Contratar agora</button>
+                <button class="btn btn-outline" id="btn-fechar-personal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const NIVEIS_ZOEIRA = [
+            "", "Donzela em Perigo", "Sobrevivente do Sofá", "Respirando com Dificuldade",
+            "Inimigo do Agachamento", "Quase Desmaiando", "Dor Existencial",
+            "Levantador de Controle Remoto", "Anti-Academia", "Frango Assustado 🐔",
+            "Projeto de Atleta", "Dor Pós-Treino", "Reclamador Oficial",
+            "Treinou 2 Dias 😱", "Quase Desistindo", "Voltando por Culpa",
+            "Alongamento Duvidoso", "Suador Profissional", "Cardio Sofrido",
+            "Levantador de Garfo 🍴", "Iniciante Raiz", "Frango em Evolução",
+            "Shape Invisível", "Já Dá pra Notar (Mentira)", "Amigo da Academia",
+            "Treino Meio Boca", "Carregador de Peso Fake", "Persistente (Finalmente)",
+            "Quase Consistente", "Pequeno Progresso", "Marombeirinho",
+            "Shape em Construção", "Disciplina Aparecendo", "Treinador de Si Mesmo",
+            "Viciado em Dor Boa", "Não Some Mais", "Meio Monstro", "Focado (às vezes)",
+            "Corpo Reagindo", "Treino Respeitável (quase)", "Quase Monstro", "Monstrinho",
+            "Já Dá um Medinho", "Rotina Sagrada (às vezes)", "Sem Dor Sem Glória",
+            "Treino Pesado (finalmente)", "Já Dá Respeito", "Bruto Iniciante", "Determinado",
+            "Foco Quase Total", "Monstro Liberado 💪", "Bruto de Verdade", "Força em Evolução",
+            "Consistência Real", "Máquina de Treino", "Disciplina Sólida", "Energia Constante",
+            "Fera da Academia", "Sem Desculpas", "Foco Inabalável", "Monstro da Academia",
+            "Fora da Curva", "Evolução Constante", "Shape em Destaque", "Respeitado",
+            "Determinação Máxima", "Alta Performance", "Treino de Elite", "Acima da Média",
+            "Diferenciado", "Quase Lenda", "Lenda Iniciante", "Lenda em Construção",
+            "Lenda Consistente", "Lenda Respeitada", "Lenda Bruta", "Lenda Evoluída",
+            "Lenda Imparável", "Lenda da Academia", "Lenda Suprema", "Lenda do Shape",
+            "Mutante Iniciante", "Mutante Evoluindo", "Mutante Forte", "Mutante Bruto",
+            "Mutante Insano", "Mutante Supremo", "Criatura da Academia", "Ser Diferenciado",
+            "Monstro Genético", "Anomalia", "Semi-Deus do Shape", "Escolhido da Maromba",
+            "Entidade Fitness", "Ser Inexplicável", "Divindade em Forma", "Deus em Evolução",
+            "Deus da Disciplina", "Deus da Força", "Deus do Shape", "ENTIDADE SUPREMA 🗿"
+        ];
+
+        const NIVEIS_SERIO = [];
+        for (let i = 1; i <= 100; i++) {
+            if (i <= 10) NIVEIS_SERIO[i] = "Iniciante";
+            else if (i <= 25) NIVEIS_SERIO[i] = "Intermediário";
+            else if (i <= 45) NIVEIS_SERIO[i] = "Avançado";
+            else if (i <= 65) NIVEIS_SERIO[i] = "Elite";
+            else if (i <= 85) NIVEIS_SERIO[i] = "Mestre";
+            else NIVEIS_SERIO[i] = "Lenda";
+        }
+
+        function getAvatarEmoji(nivel) {
+            if (nivel <= 10) return "🐣";
+            if (nivel <= 20) return "😅";
+            if (nivel <= 30) return "🐔";
+            if (nivel <= 40) return "💪";
+            if (nivel <= 50) return "🔥";
+            if (nivel <= 60) return "🦍";
+            if (nivel <= 70) return "⚡";
+            if (nivel <= 80) return "🏆";
+            if (nivel <= 90) return "🧬";
+            return "👑";
+        }
+
+        const MISSOES_BASE = [
+            { id: 'agua', nome: 'Beber água', desc: 'Beba 1 copo de água', xpBase: 5, tipo: 'consistencia' },
+            { id: 'flexoes', nome: '10 flexões', desc: 'Faça 10 flexões', xpBase: 20, tipo: 'fisico' },
+            { id: 'caminhada', nome: '20 min caminhada', desc: 'Caminhe 20 minutos', xpBase: 40, tipo: 'fisico' },
+            { id: 'treino_completo', nome: 'Treino completo', desc: 'Finalize seu treino do dia', xpBase: 100, tipo: 'fisico' },
+            { id: 'login', nome: 'Login diário', desc: 'Acesse o app hoje', xpBase: 10, tipo: 'consistencia' }
+        ];
+
+        const CONQUISTAS = [
+            { id: 'primeiro_treino', nome: 'Primeiro treino', emoji: '🏋️', condicao: (u) => u.totalTreinos >= 1 },
+            { id: 'nivel_10', nome: 'Nível 10', emoji: '⭐', condicao: (u) => u.nivel >= 10 },
+            { id: 'nivel_25', nome: 'Nível 25', emoji: '🌟', condicao: (u) => u.nivel >= 25 },
+            { id: 'nivel_50', nome: 'Nível 50', emoji: '💎', condicao: (u) => u.nivel >= 50 },
+            { id: 'streak_7', nome: '7 dias de streak', emoji: '🔥', condicao: (u) => u.streak >= 7 },
+            { id: '100_flexoes', nome: '100 flexões totais', emoji: '💪', condicao: (u) => u.totalFlexoes >= 100 },
+            { id: '30_treinos', nome: '30 treinos completos', emoji: '🏆', condicao: (u) => u.totalTreinos >= 30 }
+        ];
+
+        const AMIGOS = [
+            { nome: 'Ana', nivelBase: 12 },
+            { nome: 'Carlos', nivelBase: 8 },
+            { nome: 'Mariana', nivelBase: 22 },
+            { nome: 'Rafael', nivelBase: 5 },
+            { nome: 'Julia', nivelBase: 17 },
+        ];
+
+        const TREINOS = {
+            emagrecer: {
+                nome: '🔥 Queima Total',
+                descricao: 'Foco em queimar gordura com circuitos intensos e cardio',
+                tag: 'Objetivo: Emagrecer',
+                treinos: [
+                    {
+                        id: 'emag_a',
+                        nome: 'Treino A - HIIT',
+                        foco: 'Full Body HIIT',
+                        exercicios: [
+                            { nome: 'Polichinelo', series: 3, reps: '30 seg', descanso: '30s', emoji: '🤸' },
+                            { nome: 'Burpee', series: 3, reps: '10 reps', descanso: '45s', emoji: '💥' },
+                            { nome: 'Agachamento com salto', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦵' },
+                            { nome: 'Mountain Climber', series: 3, reps: '30 seg', descanso: '30s', emoji: '🧗' },
+                            { nome: 'Prancha', series: 3, reps: '40 seg', descanso: '30s', emoji: '🧘' },
+                            { nome: 'Corrida parada', series: 3, reps: '45 seg', descanso: '45s', emoji: '🏃' }
+                        ]
+                    },
+                    {
+                        id: 'emag_b',
+                        nome: 'Treino B - Cardio + Core',
+                        foco: 'Cardio e abdômen',
+                        exercicios: [
+                            { nome: 'Corrida leve', series: 1, reps: '15 min', descanso: '—', emoji: '🏃' },
+                            { nome: 'Abdominal reto', series: 3, reps: '15 reps', descanso: '30s', emoji: '🧱' },
+                            { nome: 'Prancha lateral', series: 3, reps: '30 seg cada', descanso: '30s', emoji: '⚖️' },
+                            { nome: 'Elevação de pernas', series: 3, reps: '12 reps', descanso: '40s', emoji: '🦵' },
+                            { nome: 'Bicicleta', series: 1, reps: '10 min', descanso: '—', emoji: '🚴' },
+                            { nome: 'Alongamento final', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
+                        ]
+                    },
+                    {
+                        id: 'emag_c',
+                        nome: 'Treino C - Circuito',
+                        foco: 'Circuito metabólico',
+                        exercicios: [
+                            { nome: 'Burpee', series: 4, reps: '8 reps', descanso: '30s', emoji: '💥' },
+                            { nome: 'Agachamento livre', series: 4, reps: '15 reps', descanso: '30s', emoji: '🦵' },
+                            { nome: 'Flexão', series: 4, reps: '10 reps', descanso: '30s', emoji: '💪' },
+                            { nome: 'Remada com elástico', series: 4, reps: '12 reps', descanso: '30s', emoji: '🎯' },
+                            { nome: 'Prancha', series: 4, reps: '30 seg', descanso: '30s', emoji: '🧘' },
+                            { nome: 'Abdominal bicicleta', series: 4, reps: '20 reps', descanso: '30s', emoji: '🚴' }
+                        ]
+                    }
+                ]
+            },
+            massa: {
+                nome: '💪 Hipertrofia Total',
+                descricao: 'Divisão ABC clássica para ganho de massa muscular',
+                tag: 'Objetivo: Ganhar massa',
+                treinos: [
+                    {
+                        id: 'massa_a',
+                        nome: 'Treino A - Peito/Tríceps',
+                        foco: 'Peitoral e tríceps',
+                        exercicios: [
+                            { nome: 'Supino reto', series: 4, reps: '10 reps', descanso: '60s', emoji: '🏋️' },
+                            { nome: 'Supino inclinado', series: 3, reps: '10 reps', descanso: '60s', emoji: '📐' },
+                            { nome: 'Crucifixo', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦅' },
+                            { nome: 'Flexão', series: 3, reps: '12 reps', descanso: '45s', emoji: '💪' },
+                            { nome: 'Tríceps testa', series: 3, reps: '12 reps', descanso: '45s', emoji: '🤜' },
+                            { nome: 'Tríceps corda', series: 3, reps: '15 reps', descanso: '45s', emoji: '🪢' }
+                        ]
+                    },
+                    {
+                        id: 'massa_b',
+                        nome: 'Treino B - Costas/Bíceps',
+                        foco: 'Dorsal e bíceps',
+                        exercicios: [
+                            { nome: 'Puxada frontal', series: 4, reps: '10 reps', descanso: '60s', emoji: '🎣' },
+                            { nome: 'Remada curvada', series: 4, reps: '10 reps', descanso: '60s', emoji: '🚣' },
+                            { nome: 'Remada unilateral', series: 3, reps: '12 reps', descanso: '45s', emoji: '🎯' },
+                            { nome: 'Barra fixa', series: 3, reps: '6 reps', descanso: '90s', emoji: '🧗' },
+                            { nome: 'Rosca direta', series: 3, reps: '12 reps', descanso: '45s', emoji: '💪' },
+                            { nome: 'Rosca martelo', series: 3, reps: '12 reps', descanso: '45s', emoji: '🔨' }
+                        ]
+                    },
+                    {
+                        id: 'massa_c',
+                        nome: 'Treino C - Pernas/Ombros',
+                        foco: 'Pernas e ombros',
+                        exercicios: [
+                            { nome: 'Agachamento livre', series: 4, reps: '10 reps', descanso: '90s', emoji: '🦵' },
+                            { nome: 'Leg press', series: 4, reps: '12 reps', descanso: '60s', emoji: '🦿' },
+                            { nome: 'Cadeira extensora', series: 3, reps: '12 reps', descanso: '45s', emoji: '🪑' },
+                            { nome: 'Desenvolvimento', series: 4, reps: '10 reps', descanso: '60s', emoji: '🏋️' },
+                            { nome: 'Elevação lateral', series: 3, reps: '15 reps', descanso: '45s', emoji: '🕊️' },
+                            { nome: 'Panturrilha', series: 4, reps: '20 reps', descanso: '30s', emoji: '🦶' }
+                        ]
+                    }
+                ]
+            },
+            saude: {
+                nome: '🧘 Bem-Estar e Saúde',
+                descricao: 'Treinos leves e funcionais para manter a saúde em dia',
+                tag: 'Objetivo: Manter saúde',
+                treinos: [
+                    {
+                        id: 'saude_a',
+                        nome: 'Treino A - Mobilidade',
+                        foco: 'Mobilidade e força',
+                        exercicios: [
+                            { nome: 'Alongamento geral', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' },
+                            { nome: 'Agachamento livre', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦵' },
+                            { nome: 'Flexão (joelhos)', series: 3, reps: '10 reps', descanso: '45s', emoji: '💪' },
+                            { nome: 'Ponte de quadril', series: 3, reps: '12 reps', descanso: '45s', emoji: '🌉' },
+                            { nome: 'Prancha', series: 3, reps: '30 seg', descanso: '30s', emoji: '🧘' },
+                            { nome: 'Caminhada', series: 1, reps: '15 min', descanso: '—', emoji: '🚶' }
+                        ]
+                    },
+                    {
+                        id: 'saude_b',
+                        nome: 'Treino B - Equilíbrio',
+                        foco: 'Corpo e equilíbrio',
+                        exercicios: [
+                            { nome: 'Caminhada', series: 1, reps: '20 min', descanso: '—', emoji: '🚶' },
+                            { nome: 'Elevação de pernas', series: 3, reps: '12 reps', descanso: '30s', emoji: '🦵' },
+                            { nome: 'Superman', series: 3, reps: '12 reps', descanso: '30s', emoji: '🦸' },
+                            { nome: 'Prancha lateral', series: 3, reps: '20 seg cada', descanso: '30s', emoji: '⚖️' },
+                            { nome: 'Alongamento', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
+                        ]
+                    },
+                    {
+                        id: 'saude_c',
+                        nome: 'Treino C - Funcional',
+                        foco: 'Leve e funcional',
+                        exercicios: [
+                            { nome: 'Caminhada', series: 1, reps: '15 min', descanso: '—', emoji: '🚶' },
+                            { nome: 'Agachamento livre', series: 3, reps: '10 reps', descanso: '40s', emoji: '🦵' },
+                            { nome: 'Remada com elástico', series: 3, reps: '12 reps', descanso: '40s', emoji: '🎯' },
+                            { nome: 'Abdominal reto', series: 3, reps: '12 reps', descanso: '40s', emoji: '🧱' },
+                            { nome: 'Alongamento', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        function getDefaultUser() {
+            return {
+                nome: 'Jogador', objetivo: 'emagrecer', idade: '16-25', estilo: 'animado',
+                nivel: 1, xp: 0, totalFlexoes: 0, totalTreinos: 0, streak: 0,
+                ultimoTreino: null, missoesConcluidas: {}, conquistas: [], ultimoLogin: null,
+                exerciciosFeitos: {}, treinosFinalizados: {},
+                assinaturaPremium: false, assinaturaPersonal: false
+            };
+        }
+
+        let user = {};
+        let diaTreinoAtivo = 0;
+
+        function carregarUser() {
+            const raw = localStorage.getItem('levelfit_user');
+            if (raw) {
+                try {
+                    user = JSON.parse(raw);
+                    const def = getDefaultUser();
+                    for (let k in def) { if (!(k in user)) user[k] = def[k]; }
+                } catch (e) { user = getDefaultUser(); }
+            } else { user = getDefaultUser(); }
+            const hoje = getHoje();
+            if (!user.missoesConcluidas) user.missoesConcluidas = {};
+            if (!user.missoesConcluidas[hoje]) user.missoesConcluidas[hoje] = [];
+            if (!user.exerciciosFeitos) user.exerciciosFeitos = {};
+            if (!user.treinosFinalizados) user.treinosFinalizados = {};
+            atualizarStreak();
+            salvarUser();
+        }
+
+        function salvarUser() { localStorage.setItem('levelfit_user', JSON.stringify(user)); }
+        function getHoje() { return new Date().toISOString().split('T')[0]; }
+
+        function atualizarStreak() {
+            const hoje = getHoje();
+            if (user.ultimoLogin === hoje) return;
+            const ontem = new Date();
+            ontem.setDate(ontem.getDate() - 1);
+            const ontemStr = ontem.toISOString().split('T')[0];
+            if (user.ultimoLogin === ontemStr) user.streak += 1;
+            else if (user.ultimoLogin !== hoje) user.streak = 0;
+            user.ultimoLogin = hoje;
+            salvarUser();
+        }
+
+        function xpParaProximoNivel(nivel) { return Math.floor(100 * Math.pow(nivel, 1.5)); }
+
+        function getNomeNivel(nivel, estilo) {
+            if (estilo === 'serio') return NIVEIS_SERIO[nivel] || `Nível ${nivel}`;
+            return NIVEIS_ZOEIRA[nivel] || `Nível ${nivel}`;
+        }
+
+        function getAvatar(nivel) { return getAvatarEmoji(nivel); }
+
+        function adicionarXP(quantidade, acao) {
+            user.xp += quantidade;
+            while (true) {
+                const needed = xpParaProximoNivel(user.nivel);
+                if (user.xp >= needed) {
+                    user.xp -= needed;
+                    user.nivel++;
+                    mostrarToast(`⬆️ UP! Nível ${user.nivel} - ${getNomeNivel(user.nivel, user.estilo)}`);
+                } else break;
+            }
+            verificarConquistas();
+            salvarUser();
+            atualizarInterface();
+        }
+
+        function getMissaoXP(missao) { return Math.floor(missao.xpBase * (1 + 0.05 * user.nivel)); }
+
+        function concluirMissao(id) {
+            const hoje = getHoje();
+            if (!user.missoesConcluidas[hoje]) user.missoesConcluidas[hoje] = [];
+            if (user.missoesConcluidas[hoje].includes(id)) {
+                mostrarToast('⚠️ Missão já concluída hoje!');
+                return;
+            }
+            const missao = MISSOES_BASE.find(m => m.id === id);
+            if (!missao) return;
+            const xpGanho = getMissaoXP(missao);
+            user.missoesConcluidas[hoje].push(id);
+            if (id === 'flexoes') user.totalFlexoes += 10;
+            if (id === 'treino_completo') { user.totalTreinos += 1; user.ultimoTreino = hoje; }
+            adicionarXP(xpGanho, `Missão: ${missao.nome}`);
+            mostrarToast(`✅ ${missao.nome} +${xpGanho} XP`);
+            if (id === 'login') atualizarStreak();
+            salvarUser();
+            atualizarInterface();
+        }
+
+        function verificarConquistas() {
+            let desbloqueou = false;
+            CONQUISTAS.forEach(c => {
+                if (!user.conquistas.includes(c.id) && c.condicao(user)) {
+                    user.conquistas.push(c.id);
+                    desbloqueou = true;
+                    mostrarToast(`🏆 Conquista desbloqueada: ${c.nome} ${c.emoji}`);
+                }
+            });
+            if (desbloqueou) salvarUser();
+        }
+
+        function gerarRanking() {
+            const amigosRank = AMIGOS.map(a => {
+                const variacao = Math.floor(Math.random() * 5) - 2;
+                let nivel = Math.max(1, a.nivelBase + variacao);
+                return { ...a, nivel };
+            });
+            const usuarioRank = { nome: user.nome, nivel: user.nivel, ehUsuario: true };
+            const todos = [...amigosRank, usuarioRank];
+            todos.sort((a, b) => b.nivel - a.nivel);
+            return todos;
+        }
+
+        function atualizarInterface() {
+            document.getElementById('dash-nome').textContent = user.nome;
+            const nivelAtual = user.nivel;
+            const nomeNivel = getNomeNivel(nivelAtual, user.estilo);
+            document.getElementById('dash-nivel-label').textContent = `Nível ${nivelAtual} • ${nomeNivel}`;
+            document.getElementById('dash-titulo-nivel').textContent = nomeNivel;
+            const emoji = getAvatar(nivelAtual);
+            document.getElementById('avatar-emoji').textContent = emoji;
+            document.getElementById('avatar-mini').textContent = emoji;
+            const needed = xpParaProximoNivel(nivelAtual);
+            const xpAtual = user.xp;
+            document.getElementById('dash-xp-info').textContent = `${xpAtual} XP · Próximo nível: ${needed} XP`;
+            document.getElementById('progresso-atual').textContent = xpAtual;
+            document.getElementById('progresso-max').textContent = needed;
+            const percent = Math.min(100, (xpAtual / needed) * 100);
+            document.getElementById('progresso-bar').style.width = percent + '%';
+            renderMissoes();
+            renderConquistas();
+            renderRanking();
+            document.getElementById('chk-modo-serio').checked = (user.estilo === 'serio');
+            atualizarTabsAssinatura();
+        }
+
+        function atualizarTabsAssinatura() {
+            document.getElementById('tab-premium').style.display = user.assinaturaPremium ? 'flex' : 'none';
+            document.getElementById('tab-personal').style.display = user.assinaturaPersonal ? 'flex' : 'none';
+            document.getElementById('btn-premium').style.display = user.assinaturaPremium ? 'none' : 'inline-flex';
+            document.getElementById('btn-personal').style.display = user.assinaturaPersonal ? 'none' : 'inline-flex';
+        }
+
+        function renderMissoes() {
+            const container = document.getElementById('lista-missoes');
+            const hoje = getHoje();
+            const concluidasHoje = user.missoesConcluidas[hoje] || [];
+            let html = '';
+            MISSOES_BASE.forEach(m => {
+                const concluida = concluidasHoje.includes(m.id);
+                const xp = getMissaoXP(m);
+                html += `
+                    <div class="missao-item ${concluida ? 'concluida' : ''}">
+                        <div class="info">
+                            <div class="nome">${m.nome}</div>
+                            <div class="desc">${m.desc}</div>
+                        </div>
+                        <div class="xp-badge">+${xp} XP</div>
+                        <button class="btn btn-success btn-pequeno" data-missao="${m.id}" ${concluida ? 'disabled' : ''}>
+                            ${concluida ? '✓' : 'Concluir'}
+                        </button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            container.querySelectorAll('[data-missao]').forEach(btn => {
+                btn.addEventListener('click', function() { concluirMissao(this.dataset.missao); });
+            });
+        }
+
+        function renderConquistas() {
+            const container = document.getElementById('lista-conquistas');
+            let html = '';
+            CONQUISTAS.forEach(c => {
+                const desbloq = user.conquistas.includes(c.id);
+                html += `
+                    <div class="conquista-item ${desbloq ? '' : 'bloqueada'}">
+                        <span class="emoji">${c.emoji}</span>
+                        ${c.nome}
+                        ${desbloq ? '✅' : '🔒'}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderRanking() {
+            const container = document.getElementById('lista-ranking');
+            const ranking = gerarRanking();
+            let html = '';
+            ranking.forEach((item, index) => {
+                const pos = index + 1;
+                const destaque = item.ehUsuario ? 'destacado' : '';
+                const nomeExib = item.ehUsuario ? `${item.nome} (você)` : item.nome;
+                html += `
+                    <div class="ranking-item ${destaque}">
+                        <span class="pos">#${pos}</span>
+                        <span class="nome">${nomeExib}</span>
+                        <span class="nivel">Nv. ${item.nivel}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function getPlanoAtual() { return TREINOS[user.objetivo] || TREINOS.saude; }
+
+        function renderTreino() {
+            const plano = getPlanoAtual();
+            if (diaTreinoAtivo >= plano.treinos.length) diaTreinoAtivo = 0;
+
+            document.getElementById('treino-titulo').textContent = plano.nome;
+            document.getElementById('treino-desc').textContent = plano.descricao;
+            document.getElementById('treino-tag').textContent = plano.tag;
+
+            const diasContainer = document.getElementById('treino-dias');
+            diasContainer.innerHTML = plano.treinos.map((t, i) =>
+                `<button class="dia-chip ${i === diaTreinoAtivo ? 'ativo' : ''}" data-dia="${i}">${t.nome}</button>`
+            ).join('');
+
+            const treino = plano.treinos[diaTreinoAtivo];
+            const exContainer = document.getElementById('treino-exercicios');
+            let feitos = 0;
+            exContainer.innerHTML = treino.exercicios.map((ex, i) => {
+                const key = `${treino.id}_${i}`;
+                const feito = !!user.exerciciosFeitos[key];
+                if (feito) feitos++;
+                return `
+                    <div class="exercicio-item ${feito ? 'feito' : ''}" data-ex="${i}">
+                        <div class="ex-emoji">${ex.emoji}</div>
+                        <div class="ex-info">
+                            <div class="ex-nome">${ex.nome}</div>
+                            <div class="ex-detalhes">${ex.series} séries × ${ex.reps} · descanso ${ex.descanso}</div>
+                        </div>
+                        <div class="ex-check">${feito ? '✓' : ''}</div>
+                    </div>
+                `;
+            }).join('');
+
+            const total = treino.exercicios.length;
+            const pct = total ? (feitos / total) * 100 : 0;
+            document.getElementById('treino-progress-fill').style.width = pct + '%';
+            document.getElementById('treino-progress-text').textContent = `${feitos}/${total}`;
+
+            const btnFinalizar = document.getElementById('btn-finalizar-treino');
+            const finalizadoHoje = user.treinosFinalizados[`finalizado_${treino.id}_${getHoje()}`];
+            if (finalizadoHoje) {
+                btnFinalizar.textContent = '✓ Treino finalizado hoje';
+                btnFinalizar.disabled = true;
+            } else if (feitos === total && total > 0) {
+                btnFinalizar.textContent = '🏁 Finalizar treino (+150 XP)';
+                btnFinalizar.disabled = false;
+            } else {
+                btnFinalizar.textContent = `🏁 Finalizar treino (${feitos}/${total})`;
+                btnFinalizar.disabled = true;
+            }
+
+            exContainer.querySelectorAll('[data-ex]').forEach(el => {
+                el.addEventListener('click', () => {
+                    toggleExercicio(treino.id, parseInt(el.dataset.ex));
+                });
+            });
+            diasContainer.querySelectorAll('[data-dia]').forEach(el => {
+                el.addEventListener('click', () => {
+                    diaTreinoAtivo = parseInt(el.dataset.dia);
+                    renderTreino();
+                });
+            });
+        }
+
+        function toggleExercicio(treinoId, idx) {
+            const key = `${treinoId}_${idx}`;
+            if (user.exerciciosFeitos[key]) delete user.exerciciosFeitos[key];
+            else user.exerciciosFeitos[key] = true;
+            salvarUser();
+            renderTreino();
+        }
+
+        function finalizarTreino(treinoId) {
+            const hoje = getHoje();
+            const key = `finalizado_${treinoId}_${hoje}`;
+            if (user.treinosFinalizados[key]) {
+                mostrarToast('⚠️ Você já finalizou este treino hoje!');
+                return;
+            }
+            user.treinosFinalizados[key] = true;
+
+            if (!user.missoesConcluidas[hoje]) user.missoesConcluidas[hoje] = [];
+            if (!user.missoesConcluidas[hoje].includes('treino_completo')) {
+                concluirMissao('treino_completo');
+            } else {
+                adicionarXP(150, 'Treino finalizado');
+                mostrarToast('💪 Treino finalizado! +150 XP');
+            }
+
+            salvarUser();
+            renderTreino();
+            atualizarInterface();
+        }
+
+        function trocarTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => {
+                t.classList.toggle('ativa', t.dataset.tab === tab);
+            });
+            document.getElementById('tela-dash').classList.toggle('ativa', tab === 'dash');
+            document.getElementById('tela-treino').classList.toggle('ativa', tab === 'treino');
+            document.getElementById('tela-premium').classList.toggle('ativa', tab === 'premium');
+            document.getElementById('tela-personal').classList.toggle('ativa', tab === 'personal');
+            if (tab === 'treino') {
+                diaTreinoAtivo = 0;
+                renderTreino();
+            } else if (tab === 'dash') {
+                atualizarInterface();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        let toastTimeout = null;
+        function mostrarToast(msg) {
+            const el = document.getElementById('toast');
+            el.textContent = msg;
+            el.classList.add('mostrar');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => el.classList.remove('mostrar'), 3000);
+        }
+
+        function acaoRapida(tipo) {
+            const hoje = getHoje();
+            if (!user.missoesConcluidas[hoje]) user.missoesConcluidas[hoje] = [];
+
+            if (tipo === 'agua') {
+                if (user.missoesConcluidas[hoje].includes('agua')) { mostrarToast('⚠️ Você já bebeu água hoje!'); return; }
+                concluirMissao('agua');
+            } else if (tipo === 'login') {
+                if (user.missoesConcluidas[hoje].includes('login')) { mostrarToast('⚠️ Login já feito hoje!'); return; }
+                concluirMissao('login');
+            } else if (tipo === 'treino') {
+                if (user.missoesConcluidas[hoje].includes('treino_completo')) { mostrarToast('⚠️ Treino já concluído hoje!'); return; }
+                concluirMissao('treino_completo');
+            }
+        }
+
+        function iniciarApp() {
+            carregarUser();
+
+            if (user.nome !== 'Jogador' || user.xp > 0 || user.nivel > 1) mostrarDash();
+            else mostrarCadastro();
+
+            document.getElementById('btn-cadastrar').addEventListener('click', cadastrar);
+
+            document.querySelectorAll('.tab').forEach(t => {
+                t.addEventListener('click', () => trocarTab(t.dataset.tab));
+            });
+
+            document.getElementById('btn-abrir-config').addEventListener('click', () => abrirModal('modal-config'));
+            document.getElementById('btn-fechar-config').addEventListener('click', fecharConfig);
+            document.getElementById('btn-resetar').addEventListener('click', resetarProgresso);
+
+            document.getElementById('btn-premium').addEventListener('click', () => abrirModal('modal-premium'));
+            document.getElementById('btn-fechar-premium').addEventListener('click', () => fecharModal('modal-premium'));
+            document.getElementById('btn-assinar').addEventListener('click', () => {
+                user.assinaturaPremium = true;
+                salvarUser();
+                fecharModal('modal-premium');
+                atualizarTabsAssinatura();
+                mostrarToast('⭐ Plano Premium ativado!');
+                setTimeout(() => trocarTab('premium'), 400);
+            });
+
+            document.getElementById('btn-personal').addEventListener('click', () => abrirModal('modal-personal'));
+            document.getElementById('btn-fechar-personal').addEventListener('click', () => fecharModal('modal-personal'));
+            document.getElementById('btn-contratar').addEventListener('click', () => {
+                user.assinaturaPersonal = true;
+                salvarUser();
+                fecharModal('modal-personal');
+                atualizarTabsAssinatura();
+                mostrarToast('🧑‍🏫 Personal contratado!');
+                setTimeout(() => trocarTab('personal'), 400);
+            });
+
+            document.getElementById('btn-cancelar-premium').addEventListener('click', () => {
+                if (confirm('Cancelar assinatura Premium?')) {
+                    user.assinaturaPremium = false;
+                    salvarUser();
+                    atualizarTabsAssinatura();
+                    mostrarToast('Assinatura Premium cancelada');
+                    trocarTab('dash');
+                }
+            });
+
+            document.getElementById('btn-cancelar-personal').addEventListener('click', () => {
+                if (confirm('Cancelar acompanhamento com Personal?')) {
+                    user.assinaturaPersonal = false;
+                    salvarUser();
+                    atualizarTabsAssinatura();
+                    mostrarToast('Acompanhamento cancelado');
+                    trocarTab('dash');
+                }
+            });
+
+            document.getElementById('btn-finalizar-treino').addEventListener('click', () => {
+                const plano = getPlanoAtual();
+                const treino = plano.treinos[diaTreinoAtivo];
+                finalizarTreino(treino.id);
+            });
+
+            document.querySelectorAll('[data-acao]').forEach(btn => {
+                btn.addEventListener('click', function() { acaoRapida(this.dataset.acao); });
+            });
+
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) this.classList.remove('ativo');
+                });
+            });
+
+            setInterval(() => {
+                const hoje = getHoje();
+                if (!user.missoesConcluidas[hoje]) {
+                    user.missoesConcluidas[hoje] = [];
+                    salvarUser();
+                    atualizarInterface();
+                }
+            }, 60000);
+        }
+
+        function cadastrar() {
+            const nome = document.getElementById('input-nome').value.trim() || 'Jogador';
+            const objetivo = document.getElementById('input-objetivo').value;
+            const idade = document.getElementById('input-idade').value;
+            const estilo = document.querySelector('input[name="estilo"]:checked').value;
+
+            user.nome = nome;
+            user.objetivo = objetivo;
+            user.idade = idade;
+            user.estilo = estilo;
+            diaTreinoAtivo = 0;
+            salvarUser();
+            mostrarDash();
+            mostrarToast(`🚀 Bem-vindo, ${nome}!`);
+        }
+
+        function mostrarDash() {
+            document.getElementById('tab-bar').style.display = 'flex';
+            document.getElementById('tela-cadastro').classList.remove('ativa');
+            document.getElementById('tela-treino').classList.remove('ativa');
+            document.getElementById('tela-premium').classList.remove('ativa');
+            document.getElementById('tela-personal').classList.remove('ativa');
+            document.getElementById('tela-dash').classList.add('ativa');
+            document.querySelectorAll('.tab').forEach(t => t.classList.toggle('ativa', t.dataset.tab === 'dash'));
+            atualizarInterface();
+        }
+
+        function mostrarCadastro() {
+            document.getElementById('tab-bar').style.display = 'none';
+            document.getElementById('tela-cadastro').classList.add('ativa');
+            document.getElementById('tela-dash').classList.remove('ativa');
+            document.getElementById('tela-treino').classList.remove('ativa');
+            document.getElementById('tela-premium').classList.remove('ativa');
+            document.getElementById('tela-personal').classList.remove('ativa');
+        }
+
+        function abrirModal(id) { document.getElementById(id).classList.add('ativo'); }
+        function fecharModal(id) { document.getElementById(id).classList.remove('ativo'); }
+
+        function fecharConfig() {
+            const serio = document.getElementById('chk-modo-serio').checked;
+            user.estilo = serio ? 'serio' : 'animado';
+            salvarUser();
+            fecharModal('modal-config');
+            atualizarInterface();
+            mostrarToast('⚙️ Configurações salvas');
+        }
+
+        function resetarProgresso() {
+            if (confirm('Tem certeza que deseja resetar todo o progresso?')) {
+                localStorage.removeItem('levelfit_user');
+                user = getDefaultUser();
+                diaTreinoAtivo = 0;
+                salvarUser();
+                fecharModal('modal-config');
+                mostrarToast('🔄 Progresso resetado');
+                mostrarCadastro();
+                document.getElementById('input-nome').value = '';
+                document.querySelector('input[name="estilo"][value="animado"]').checked = true;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', iniciarApp);
+    </script>
+
+</body>
+</html>
