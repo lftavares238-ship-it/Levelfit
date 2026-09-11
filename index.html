@@ -27,14 +27,26 @@
 
         .tab-bar { display: flex; gap: 4px; background: #1e2634; padding: 6px; border-radius: 60px; margin-bottom: 18px; border: 1px solid #2a3344; overflow-x: auto; }
         .tab-bar::-webkit-scrollbar { height: 0; }
-        .tab { flex: 1; background: transparent; border: none; color: #8a9bb5; padding: 10px 10px; border-radius: 60px; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; }
+        .tab { flex: 1; background: transparent; border: none; color: #8a9bb5; padding: 10px 10px; border-radius: 60px; font-weight: 700; font-size: 13px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 4px; white-space: nowrap; position: relative; }
         .tab.ativa { background: #6c5ce7; color: #fff; box-shadow: 0 3px 0 #4a3fb0; }
         .tab.premium-tab.ativa { background: linear-gradient(135deg, #fdcb6e, #e17055); color: #1e272e; box-shadow: 0 3px 0 #a06b1c; }
         .tab.personal-tab.ativa { background: linear-gradient(135deg, #00b894, #00cec9); color: #fff; box-shadow: 0 3px 0 #007d65; }
+        .tab-badge { position: absolute; top: 2px; right: 4px; background: #e17055; color: #fff; font-size: 10px; font-weight: 800; min-width: 18px; height: 18px; border-radius: 20px; display: flex; align-items: center; justify-content: center; padding: 0 4px; border: 2px solid #141a24; }
 
-        #tela-cadastro { text-align: center; padding: 10px 0; }
-        #tela-cadastro h1 { font-size: 32px; margin-bottom: 4px; background: linear-gradient(135deg, #fdcb6e, #e17055); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
-        #tela-cadastro .sub { color: #8a9bb5; margin-bottom: 24px; font-size: 14px; }
+        /* AUTH */
+        #tela-auth { text-align: center; padding: 10px 0; }
+        #tela-auth h1 { font-size: 34px; margin-bottom: 4px; background: linear-gradient(135deg, #fdcb6e, #e17055); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+        #tela-auth .sub { color: #8a9bb5; margin-bottom: 22px; font-size: 14px; }
+
+        .auth-tabs { display: flex; gap: 4px; background: #1e2634; padding: 5px; border-radius: 40px; margin-bottom: 20px; border: 1px solid #2a3344; }
+        .auth-tab { flex: 1; background: transparent; border: none; color: #8a9bb5; padding: 11px 8px; border-radius: 40px; font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s; }
+        .auth-tab.ativa { background: #6c5ce7; color: #fff; box-shadow: 0 3px 0 #4a3fb0; }
+        .auth-form { display: none; }
+        .auth-form.ativo { display: block; animation: fadeIn 0.3s ease; }
+
+        .auth-hint { font-size: 12px; color: #8a9bb5; text-align: center; margin-top: 12px; line-height: 1.5; }
+        .auth-hint a { color: #a29bfe; text-decoration: none; font-weight: 600; cursor: pointer; }
+
         .campo { margin-bottom: 18px; text-align: left; }
         .campo label { display: block; font-size: 13px; font-weight: 600; color: #a0b3d0; margin-bottom: 4px; }
         .campo input, .campo select { width: 100%; padding: 14px 16px; border-radius: 16px; border: 2px solid #2a3344; background: #1e2634; color: #fff; font-size: 16px; outline: none; transition: 0.2s; }
@@ -114,13 +126,16 @@
         .treino-progress .bar-fill { height: 100%; background: linear-gradient(90deg, #00b894, #00d2a0); width: 0%; transition: width 0.3s ease; }
         .treino-progress .label { display: flex; justify-content: space-between; font-size: 12px; color: #8a9bb5; margin-bottom: 6px; }
 
-        /* PREMIUM */
         .premium-banner { background: linear-gradient(135deg, #2d1b4e, #4a2c7a); border: 2px solid #fdcb6e; border-radius: 20px; padding: 18px; margin-bottom: 16px; text-align: center; position: relative; overflow: hidden; }
         .premium-banner::before { content: '⭐'; position: absolute; top: -10px; right: -10px; font-size: 80px; opacity: 0.1; }
         .premium-banner h2 { font-size: 22px; color: #fdcb6e; margin-bottom: 6px; }
         .premium-banner p { font-size: 13px; color: #d0c4f0; }
         .premium-badge-row { display: flex; gap: 6px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
         .premium-badge { background: rgba(253, 203, 110, 0.15); color: #fdcb6e; border: 1px solid #fdcb6e; border-radius: 40px; padding: 4px 12px; font-size: 11px; font-weight: 700; }
+
+        .subtabs { display: flex; gap: 4px; background: #1e2634; padding: 5px; border-radius: 40px; margin-bottom: 16px; border: 1px solid #2a3344; }
+        .subtab { flex: 1; background: transparent; border: none; color: #8a9bb5; padding: 9px 8px; border-radius: 40px; font-weight: 700; font-size: 12px; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+        .subtab.ativa { background: linear-gradient(135deg, #fdcb6e, #e17055); color: #1e272e; }
 
         .card-premium { background: #1e2634; border-radius: 16px; padding: 16px; margin-bottom: 12px; border-left: 4px solid #fdcb6e; }
         .card-premium .card-titulo { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; margin-bottom: 8px; }
@@ -130,56 +145,173 @@
         .card-premium .card-itens li { font-size: 13px; color: #c8d4e6; padding: 6px 0; border-bottom: 1px solid #2a3344; display: flex; align-items: center; gap: 8px; }
         .card-premium .card-itens li:last-child { border-bottom: none; }
 
-        /* PERSONAL */
+        .dieta-header { background: linear-gradient(135deg, #2d1b4e, #3a1d4a); border: 2px solid #fdcb6e; border-radius: 20px; padding: 18px; margin-bottom: 16px; text-align: center; }
+        .dieta-header h3 { font-size: 18px; color: #fdcb6e; margin-bottom: 6px; }
+        .dieta-header .kcal-total { font-size: 26px; font-weight: 800; color: #fff; margin: 6px 0; }
+        .dieta-header .kcal-total small { font-size: 13px; color: #b0c4e0; font-weight: 500; }
+        .dieta-header .macros { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .macro-chip { background: rgba(255,255,255,0.08); border-radius: 40px; padding: 4px 12px; font-size: 11px; font-weight: 700; border: 1px solid rgba(255,255,255,0.15); }
+        .macro-chip.prot { color: #ff7a7a; border-color: #ff7a7a; }
+        .macro-chip.carb { color: #7ab8ff; border-color: #7ab8ff; }
+        .macro-chip.gord { color: #ffd97a; border-color: #ffd97a; }
+
+        .refeicao-card { background: #1e2634; border-radius: 16px; padding: 14px; margin-bottom: 12px; border-left: 4px solid #fdcb6e; transition: 0.2s; cursor: pointer; }
+        .refeicao-card.feita { opacity: 0.6; border-left-color: #00b894; }
+        .refeicao-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .refeicao-header .refeicao-nome { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
+        .refeicao-header .refeicao-nome .refeicao-emoji { font-size: 22px; }
+        .refeicao-header .refeicao-hora { font-size: 12px; color: #8a9bb5; margin-left: 6px; }
+        .refeicao-header .refeicao-kcal { font-size: 13px; color: #fdcb6e; font-weight: 700; }
+        .refeicao-header .refeicao-status { font-size: 11px; padding: 3px 10px; border-radius: 40px; font-weight: 700; margin-left: 8px; }
+        .refeicao-card.feita .refeicao-status { background: #00b894; color: #fff; }
+        .refeicao-card:not(.feita) .refeicao-status { background: #2a3a55; color: #8a9bb5; }
+
+        .refeicao-itens { list-style: none; margin-top: 6px; }
+        .refeicao-itens li { font-size: 13px; color: #c8d4e6; padding: 5px 0; display: flex; align-items: center; gap: 6px; }
+        .refeicao-itens li::before { content: '•'; color: #fdcb6e; font-weight: 700; font-size: 16px; }
+
+        .dieta-progress { margin-bottom: 14px; }
+        .dieta-progress .bar { background: #1e2634; height: 12px; border-radius: 60px; overflow: hidden; border: 1px solid #2a3344; }
+        .dieta-progress .bar-fill { height: 100%; background: linear-gradient(90deg, #fdcb6e, #e17055); width: 0%; transition: width 0.3s ease; }
+        .dieta-progress .label { display: flex; justify-content: space-between; font-size: 12px; color: #8a9bb5; margin-bottom: 6px; }
+
+        .medidas-header { background: linear-gradient(135deg, #2d1b4e, #1e2634); border: 2px solid #6c5ce7; border-radius: 20px; padding: 18px; margin-bottom: 16px; text-align: center; }
+        .medidas-header h3 { font-size: 18px; color: #a29bfe; margin-bottom: 4px; }
+        .medidas-header p { font-size: 12px; color: #8a9bb5; }
+        .medida-secao-titulo { font-size: 14px; font-weight: 800; color: #a29bfe; margin: 16px 0 10px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .medida-secao-titulo::after { content: ''; flex: 1; height: 1px; background: #2a3344; }
+        .medida-atual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 6px; }
+        .medida-box { background: #1e2634; border-radius: 14px; padding: 12px; text-align: center; border: 1px solid #2a3344; }
+        .medida-box .label { font-size: 11px; color: #8a9bb5; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .medida-box .valor { font-size: 20px; font-weight: 800; color: #fff; }
+        .medida-box .valor small { font-size: 12px; color: #8a9bb5; font-weight: 500; }
+        .medida-box .delta { font-size: 11px; margin-top: 2px; font-weight: 700; }
+        .medida-box .delta.pos { color: #00b894; }
+        .medida-box .delta.neg { color: #e17055; }
+        .historico-item { background: #1e2634; border-radius: 14px; padding: 12px 14px; margin-bottom: 8px; border-left: 4px solid #6c5ce7; }
+        .historico-item .data { font-size: 13px; font-weight: 700; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .historico-item .data small { color: #8a9bb5; font-weight: 500; font-size: 11px; }
+        .historico-item .valores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 12px; color: #c8d4e6; }
+        .historico-item .valores-grid span { display: flex; justify-content: space-between; }
+        .historico-item .valores-grid span b { color: #a29bfe; }
+
+        .add-medida-form { background: #1e2634; border-radius: 20px; padding: 16px; border: 2px solid #2a3344; margin-bottom: 16px; display: none; }
+        .add-medida-form.ativo { display: block; animation: fadeIn 0.3s ease; }
+        .add-medida-form h4 { margin-bottom: 14px; font-size: 15px; color: #a29bfe; }
+        .campo-medida { margin-bottom: 10px; }
+        .campo-medida label { display: block; font-size: 12px; color: #a0b3d0; font-weight: 600; margin-bottom: 4px; }
+        .campo-medida input { width: 100%; padding: 10px 14px; border-radius: 12px; border: 2px solid #2a3344; background: #141a24; color: #fff; font-size: 15px; outline: none; }
+        .campo-medida input:focus { border-color: #6c5ce7; }
+        .campo-medida input::placeholder { color: #4a5a7a; }
+        .campo-medida-duplo { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .campo-medida-triplo { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
         .personal-banner { background: linear-gradient(135deg, #0a4a3a, #1a7a60); border: 2px solid #00d2a0; border-radius: 20px; padding: 18px; margin-bottom: 16px; text-align: center; position: relative; overflow: hidden; }
         .personal-banner::before { content: '🏋️'; position: absolute; top: -10px; right: -10px; font-size: 80px; opacity: 0.1; }
         .personal-banner h2 { font-size: 22px; color: #00d2a0; margin-bottom: 6px; }
         .personal-banner p { font-size: 13px; color: #b8f0dc; }
 
         .trainer-card { background: #1e2634; border-radius: 20px; padding: 16px; margin-bottom: 12px; border: 2px solid #2a3344; display: flex; align-items: center; gap: 14px; }
-        .trainer-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #00b894, #00cec9); display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; border: 3px solid #00d2a0; }
-        .trainer-info { flex: 1; }
+        .trainer-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #00b894, #00cec9); display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; border: 3px solid #00d2a0; position: relative; }
+        .trainer-info { flex: 1; min-width: 0; }
         .trainer-info .nome { font-weight: 700; font-size: 16px; }
         .trainer-info .especialidade { font-size: 12px; color: #8a9bb5; margin-top: 2px; }
         .trainer-info .status { font-size: 11px; color: #00d2a0; font-weight: 700; margin-top: 4px; display: flex; align-items: center; gap: 4px; }
         .trainer-info .status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #00d2a0; box-shadow: 0 0 8px #00d2a0; }
+        .trainer-info .status.offline { color: #8a9bb5; }
+        .trainer-info .status.offline::before { background: #8a9bb5; box-shadow: none; }
+        .trainer-info .status.treino { color: #fdcb6e; }
+        .trainer-info .status.treino::before { background: #fdcb6e; box-shadow: 0 0 8px #fdcb6e; }
+        .trainer-info .ultima-msg { font-size: 11px; color: #4a5a7a; margin-top: 4px; }
 
-        .chat-box { background: #1e2634; border-radius: 16px; padding: 16px; margin-bottom: 12px; border: 1px solid #2a3344; }
-        .chat-box .chat-titulo { font-size: 13px; color: #8a9bb5; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .msg { display: flex; gap: 10px; margin-bottom: 12px; }
+        .quick-actions-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+        .quick-actions-row .btn { padding: 8px 6px; font-size: 11px; border-radius: 14px; font-weight: 700; line-height: 1.3; }
+
+        .chat-box { background: #1e2634; border-radius: 16px; padding: 14px; margin-bottom: 10px; border: 1px solid #2a3344; }
+        .chat-box .chat-titulo { font-size: 12px; color: #8a9bb5; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; justify-content: space-between; align-items: center; }
+        .chat-scroll { max-height: 340px; overflow-y: auto; padding-right: 4px; }
+        .chat-scroll::-webkit-scrollbar { width: 4px; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: #2a3a55; border-radius: 10px; }
+
+        .msg { display: flex; gap: 8px; margin-bottom: 10px; animation: msgIn 0.3s ease; }
+        @keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
         .msg.meu { flex-direction: row-reverse; }
-        .msg .bolha { background: #2a3a55; padding: 10px 14px; border-radius: 16px; font-size: 13px; max-width: 80%; }
-        .msg.meu .bolha { background: #00b894; color: #fff; }
-        .msg .msg-avatar { width: 32px; height: 32px; border-radius: 50%; background: #141a24; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .msg .bolha { background: #2a3a55; padding: 9px 13px; border-radius: 16px; font-size: 13px; max-width: 78%; line-height: 1.4; word-wrap: break-word; }
+        .msg.meu .bolha { background: linear-gradient(135deg, #00b894, #00cec9); color: #fff; border-bottom-right-radius: 4px; }
+        .msg.coach .bolha { border-bottom-left-radius: 4px; }
+        .msg .msg-avatar { width: 30px; height: 30px; border-radius: 50%; background: #141a24; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; border: 1px solid #2a3344; }
+        .msg .msg-hora { font-size: 10px; color: #4a5a7a; align-self: flex-end; margin-bottom: 2px; }
+
+        .msg-digitando .bolha { display: flex; gap: 4px; align-items: center; padding: 12px 14px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #8a9bb5; animation: dotAnim 1.2s infinite; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes dotAnim { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+        .chat-input-row { display: flex; gap: 6px; margin-top: 10px; }
+        .chat-input-row input { flex: 1; padding: 11px 14px; border-radius: 30px; border: 2px solid #2a3344; background: #141a24; color: #fff; font-size: 14px; outline: none; }
+        .chat-input-row input:focus { border-color: #00d2a0; }
+        .chat-input-row button { background: linear-gradient(135deg, #00b894, #00cec9); border: none; color: #fff; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 3px 0 #007d65; transition: 0.2s; }
+        .chat-input-row button:active { transform: translateY(2px); box-shadow: 0 1px 0 #007d65; }
+
+        .sugestoes-chips { display: flex; gap: 6px; overflow-x: auto; padding: 8px 0 4px; -webkit-overflow-scrolling: touch; }
+        .sugestoes-chips::-webkit-scrollbar { height: 0; }
+        .sugestao-chip { background: #141a24; border: 1.5px solid #00d2a0; color: #00d2a0; padding: 6px 12px; border-radius: 40px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.2s; flex-shrink: 0; }
+        .sugestao-chip:active { background: #00d2a0; color: #fff; }
 
         .plano-personal-item { background: #1e2634; border-radius: 16px; padding: 14px; margin-bottom: 10px; border-left: 4px solid #00d2a0; }
-        .plano-personal-item .titulo { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
-        .plano-personal-item .desc { font-size: 12px; color: #8a9bb5; }
+        .plano-personal-item.alerta { border-left-color: #e17055; }
+        .plano-personal-item .titulo { font-weight: 700; font-size: 14px; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
+        .plano-personal-item .titulo .tag { font-size: 10px; background: #2a3a55; color: #8a9bb5; padding: 2px 8px; border-radius: 40px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .plano-personal-item .desc { font-size: 12px; color: #8a9bb5; line-height: 1.5; }
+        .plano-personal-item .btn { margin-top: 10px; }
 
-        /* MODAL */
+        .evolucao-card { background: #1e2634; border-radius: 16px; padding: 16px; margin-bottom: 10px; border: 1px solid #2a3344; }
+        .evolucao-card .titulo { font-size: 13px; color: #8a9bb5; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 10px; }
+        .grafico-barras { display: flex; align-items: flex-end; gap: 6px; height: 100px; padding: 6px 0; }
+        .barra-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+        .barra { width: 100%; background: linear-gradient(180deg, #00d2a0, #00b894); border-radius: 6px 6px 0 0; min-height: 4px; transition: height 0.4s ease; }
+        .barra-valor { font-size: 10px; color: #00d2a0; font-weight: 700; }
+        .barra-data { font-size: 9px; color: #4a5a7a; }
+        .comparativo-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; font-size: 12px; margin-bottom: 8px; }
+        .comparativo-grid .valor-a { text-align: right; color: #8a9bb5; }
+        .comparativo-grid .seta { color: #6c5ce7; font-weight: 700; }
+        .comparativo-grid .valor-b { text-align: left; color: #fff; font-weight: 700; }
+        .comparativo-grid .label-c { grid-column: 1 / -1; font-size: 10px; color: #4a5a7a; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .stat-box { background: #141a24; border-radius: 12px; padding: 12px; text-align: center; border: 1px solid #2a3344; }
+        .stat-box .v { font-size: 20px; font-weight: 800; color: #00d2a0; }
+        .stat-box .l { font-size: 10px; color: #8a9bb5; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
         .modal-overlay.ativo { display: flex; }
-        .modal-box { background: #141a24; border-radius: 32px; padding: 28px 24px; max-width: 400px; width: 100%; border: 1px solid #2a3344; max-height: 80vh; overflow-y: auto; }
-        .modal-box h2 { margin-bottom: 12px; }
-        .modal-box .btn { margin-top: 12px; }
+        .modal-box { background: #141a24; border-radius: 32px; padding: 24px 22px; max-width: 420px; width: 100%; border: 1px solid #2a3344; max-height: 88vh; overflow-y: auto; }
+        .modal-box h2 { margin-bottom: 12px; font-size: 20px; }
+        .modal-box p { font-size: 13px; color: #b0c4e0; line-height: 1.5; }
+        .modal-box .btn { margin-top: 10px; }
+
+        .form-checkin label { display: block; font-size: 12px; color: #a0b3d0; font-weight: 600; margin-bottom: 4px; margin-top: 12px; }
+        .form-checkin input, .form-checkin textarea, .form-checkin select { width: 100%; padding: 10px 14px; border-radius: 12px; border: 2px solid #2a3344; background: #1e2634; color: #fff; font-size: 14px; outline: none; font-family: inherit; }
+        .form-checkin input:focus, .form-checkin textarea:focus, .form-checkin select:focus { border-color: #00d2a0; }
+        .form-checkin textarea { resize: vertical; min-height: 60px; }
+        .escala-botoes { display: flex; gap: 6px; }
+        .escala-botoes .esc { flex: 1; background: #1e2634; border: 2px solid #2a3344; color: #8a9bb5; padding: 8px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 13px; transition: 0.2s; }
+        .escala-botoes .esc.ativo { background: #00b894; color: #fff; border-color: #00d2a0; }
 
         .config-opcoes { display: flex; flex-direction: column; gap: 12px; margin: 10px 0; }
         .config-opcoes label { display: flex; align-items: center; gap: 12px; font-size: 16px; cursor: pointer; }
         .config-opcoes input[type="checkbox"] { width: 20px; height: 20px; accent-color: #6c5ce7; }
 
+        .user-card-config { background: #1e2634; border-radius: 16px; padding: 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; border: 1px solid #2a3344; }
+        .user-card-config .uc-avatar { width: 46px; height: 46px; border-radius: 50%; background: #2a3a55; display: flex; align-items: center; justify-content: center; font-size: 24px; border: 2px solid #6c5ce7; flex-shrink: 0; }
+        .user-card-config .uc-info { flex: 1; min-width: 0; }
+        .user-card-config .uc-nome { font-weight: 700; font-size: 15px; }
+        .user-card-config .uc-email { font-size: 12px; color: #8a9bb5; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; }
+
         .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1e2634; color: #fff; padding: 12px 24px; border-radius: 60px; border: 1px solid #2a3344; font-weight: 600; z-index: 9999; display: none; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); animation: toastAnim 0.3s ease; max-width: 90vw; text-align: center; }
         .toast.mostrar { display: block; }
         @keyframes toastAnim { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-
-        .text-center { text-align: center; }
-        .mt-8 { margin-top: 8px; }
-        .mb-8 { margin-bottom: 8px; }
-        .flex { display: flex; gap: 8px; }
-        .gap-4 { gap: 4px; }
-        .w-full { width: 100%; }
-        .opcao-premium { background: linear-gradient(135deg, #2d1b4e, #1e2634); border: 2px solid #6c5ce7; border-radius: 20px; padding: 16px; margin: 12px 0; text-align: center; }
-        .opcao-premium .preco { font-size: 24px; font-weight: 800; color: #fdcb6e; }
-        .badge { background: #e17055; color: #fff; border-radius: 40px; padding: 2px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; display: inline-block; }
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #1e2634; }
@@ -196,48 +328,87 @@
             <button class="tab ativa" data-tab="dash">🏠 Início</button>
             <button class="tab" data-tab="treino">🏋️ Treino</button>
             <button class="tab premium-tab" data-tab="premium" id="tab-premium" style="display:none;">⭐ Premium</button>
-            <button class="tab personal-tab" data-tab="personal" id="tab-personal" style="display:none;">🧑‍🏫 Personal</button>
+            <button class="tab personal-tab" data-tab="personal" id="tab-personal" style="display:none;">
+                🧑‍🏫 Personal
+                <span class="tab-badge" id="tab-personal-badge" style="display:none;">0</span>
+            </button>
         </div>
 
-        <div id="tela-cadastro" class="tela ativa">
+        <!-- TELA DE AUTH (LOGIN / CADASTRO) -->
+        <div id="tela-auth" class="tela ativa">
             <h1>⚡ LevelFit</h1>
             <div class="sub">Treinar virou jogo</div>
 
-            <div class="campo">
-                <label>👤 Seu nome</label>
-                <input type="text" id="input-nome" placeholder="Digite seu nome" value="Jogador">
+            <div class="auth-tabs">
+                <button class="auth-tab ativa" data-auth="login">🔑 Entrar</button>
+                <button class="auth-tab" data-auth="cadastro">✨ Criar conta</button>
             </div>
-            <div class="campo">
-                <label>🎯 Objetivo principal</label>
-                <select id="input-objetivo">
-                    <option value="emagrecer">🔥 Emagrecer</option>
-                    <option value="massa">💪 Ganhar massa</option>
-                    <option value="saude">🧘 Manter saúde</option>
-                </select>
-            </div>
-            <div class="campo">
-                <label>📅 Faixa etária</label>
-                <select id="input-idade">
-                    <option value="16-25">16 – 25 anos</option>
-                    <option value="26-30">26 – 30 anos</option>
-                    <option value="31-45">31 – 45 anos</option>
-                    <option value="45+">Acima de 45</option>
-                </select>
-            </div>
-            <div class="campo">
-                <label>🎮 Estilo do app</label>
-                <div class="radio-group">
-                    <label>
-                        <input type="radio" name="estilo" value="animado" checked>
-                        <span class="radio-label">🔥 Animado<br><small>zoeira e cores</small></span>
-                    </label>
-                    <label>
-                        <input type="radio" name="estilo" value="serio">
-                        <span class="radio-label">🧘 Sério<br><small>foco e saúde</small></span>
-                    </label>
+
+            <!-- LOGIN -->
+            <div id="auth-login" class="auth-form ativo">
+                <div class="campo">
+                    <label>📧 E-mail</label>
+                    <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email">
+                </div>
+                <div class="campo">
+                    <label>🔒 Senha</label>
+                    <input type="password" id="login-senha" placeholder="Sua senha" autocomplete="current-password">
+                </div>
+                <button class="btn btn-primary" id="btn-login">🔑 Entrar</button>
+                <div class="auth-hint">
+                    Não tem conta? <a id="link-ir-cadastro">Crie uma agora</a>
                 </div>
             </div>
-            <button class="btn btn-primary" id="btn-cadastrar">🚀 Começar missão</button>
+
+            <!-- CADASTRO -->
+            <div id="auth-cadastro" class="auth-form">
+                <div class="campo">
+                    <label>👤 Seu nome</label>
+                    <input type="text" id="cad-nome" placeholder="Digite seu nome" autocomplete="name">
+                </div>
+                <div class="campo">
+                    <label>📧 E-mail</label>
+                    <input type="email" id="cad-email" placeholder="seu@email.com" autocomplete="email">
+                </div>
+                <div class="campo">
+                    <label>🔒 Senha</label>
+                    <input type="password" id="cad-senha" placeholder="Mínimo 4 caracteres" autocomplete="new-password">
+                </div>
+                <div class="campo">
+                    <label>🎯 Objetivo principal</label>
+                    <select id="cad-objetivo">
+                        <option value="emagrecer">🔥 Emagrecer</option>
+                        <option value="massa">💪 Ganhar massa</option>
+                        <option value="saude">🧘 Manter saúde</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label>📅 Faixa etária</label>
+                    <select id="cad-idade">
+                        <option value="16-25">16 – 25 anos</option>
+                        <option value="26-30">26 – 30 anos</option>
+                        <option value="31-45">31 – 45 anos</option>
+                        <option value="45+">Acima de 45</option>
+                    </select>
+                </div>
+                <div class="campo">
+                    <label>🎮 Estilo do app</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="cad-estilo" value="animado" checked>
+                            <span class="radio-label">🔥 Animado<br><small>zoeira e cores</small></span>
+                        </label>
+                        <label>
+                            <input type="radio" name="cad-estilo" value="serio">
+                            <span class="radio-label">🧘 Sério<br><small>foco e saúde</small></span>
+                        </label>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="btn-cadastrar">🚀 Criar conta</button>
+                <div class="auth-hint">
+                    Já tem conta? <a id="link-ir-login">Faça login</a>
+                </div>
+            </div>
         </div>
 
         <div id="tela-dash" class="tela">
@@ -293,7 +464,6 @@
         </div>
 
         <div id="tela-treino" class="tela">
-
             <div class="treino-header">
                 <h2 id="treino-titulo">🔥 Queima Total</h2>
                 <p id="treino-desc">Foco em queimar gordura com circuitos intensos</p>
@@ -315,15 +485,9 @@
             <div id="treino-exercicios"></div>
 
             <button class="btn btn-success" id="btn-finalizar-treino" style="margin-top:16px;">🏁 Finalizar treino</button>
-
-            <div style="text-align:center; margin-top:16px; font-size:12px; color:#4a5a7a;">
-                Toque nos exercícios para marcar como feitos
-            </div>
         </div>
 
-        <!-- TELA PREMIUM -->
         <div id="tela-premium" class="tela">
-
             <div class="premium-banner">
                 <h2>⭐ Membro Premium</h2>
                 <p>Sua assinatura está ativa. Aproveite tudo!</p>
@@ -333,76 +497,159 @@
                 </div>
             </div>
 
-            <div class="secao-titulo">🔥 Treinos Exclusivos</div>
-
-            <div class="card-premium">
-                <div class="card-titulo"><span class="emoji">💥</span> HIIT Extremo</div>
-                <div class="card-desc">Circuito avançado de 25 minutos para queima máxima</div>
-                <ul class="card-itens">
-                    <li>🏃 Sprint intervalado — 8x 30s</li>
-                    <li>💥 Burpee explosivo — 5x 12 reps</li>
-                    <li>🦵 Agachamento com salto — 5x 15 reps</li>
-                    <li>🧗 Mountain climber — 5x 40s</li>
-                </ul>
+            <div class="subtabs" id="subtabs-premium">
+                <button class="subtab ativa" data-sub="treinos">🔥 Treinos</button>
+                <button class="subtab" data-sub="dieta">🍽️ Dieta</button>
+                <button class="subtab" data-sub="medidas">📏 Medidas</button>
             </div>
 
-            <div class="card-premium">
-                <div class="card-titulo"><span class="emoji">🦍</span> Força Bruta</div>
-                <div class="card-desc">Protocolo de força e hipertrofia nível avançado</div>
-                <ul class="card-itens">
-                    <li>🏋️ Levantamento terra — 5x 5 reps</li>
-                    <li>💪 Supino pesado — 5x 5 reps</li>
-                    <li>🦵 Agachamento profundo — 5x 5 reps</li>
-                    <li>🧗 Barra fixa — 4x até falha</li>
-                </ul>
+            <div id="sub-treinos" class="sub-conteudo">
+                <div class="secao-titulo">🔥 Treinos Exclusivos</div>
+                <div class="card-premium">
+                    <div class="card-titulo"><span class="emoji">💥</span> HIIT Extremo</div>
+                    <div class="card-desc">Circuito avançado de 25 minutos para queima máxima</div>
+                    <ul class="card-itens">
+                        <li>🏃 Sprint intervalado — 8x 30s</li>
+                        <li>💥 Burpee explosivo — 5x 12 reps</li>
+                        <li>🦵 Agachamento com salto — 5x 15 reps</li>
+                        <li>🧗 Mountain climber — 5x 40s</li>
+                    </ul>
+                </div>
+                <div class="card-premium">
+                    <div class="card-titulo"><span class="emoji">🦍</span> Força Bruta</div>
+                    <div class="card-desc">Protocolo de força e hipertrofia nível avançado</div>
+                    <ul class="card-itens">
+                        <li>🏋️ Levantamento terra — 5x 5 reps</li>
+                        <li>💪 Supino pesado — 5x 5 reps</li>
+                        <li>🦵 Agachamento profundo — 5x 5 reps</li>
+                        <li>🧗 Barra fixa — 4x até falha</li>
+                    </ul>
+                </div>
+                <div class="card-premium">
+                    <div class="card-titulo"><span class="emoji">🥊</span> Cardio Metabólico</div>
+                    <div class="card-desc">Sessão de 40 minutos focada em queima contínua</div>
+                    <ul class="card-itens">
+                        <li>🏃 Corrida esteira — 20 min contínuos</li>
+                        <li>🚴 Bike HIIT — 10 min (30s forte / 30s leve)</li>
+                        <li>🤸 Corda — 3x 3 min</li>
+                        <li>🧘 Alongamento final — 5 min</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="secao-titulo">🥗 Planos Alimentares</div>
-
-            <div class="card-premium">
-                <div class="card-titulo"><span class="emoji">🍽️</span> Dieta para Emagrecer</div>
-                <div class="card-desc">Cardápio semanal de 1800 kcal com déficit controlado</div>
-                <ul class="card-itens">
-                    <li>☕ Café da manhã — 350 kcal</li>
-                    <li>🥗 Almoço — 600 kcal</li>
-                    <li>🍎 Lanche — 250 kcal</li>
-                    <li>🍲 Jantar — 600 kcal</li>
-                </ul>
+            <div id="sub-dieta" class="sub-conteudo" style="display:none;">
+                <div class="dieta-header">
+                    <h3 id="dieta-titulo">🍽️ Dieta para Emagrecer</h3>
+                    <div class="kcal-total" id="dieta-kcal">1800 <small>kcal / dia</small></div>
+                    <div class="macros">
+                        <span class="macro-chip prot" id="dieta-prot">Proteína 130g</span>
+                        <span class="macro-chip carb" id="dieta-carb">Carbo 180g</span>
+                        <span class="macro-chip gord" id="dieta-gord">Gordura 55g</span>
+                    </div>
+                </div>
+                <div class="dieta-progress">
+                    <div class="label">
+                        <span>Refeições feitas hoje</span>
+                        <span id="dieta-progress-text">0/5</span>
+                    </div>
+                    <div class="bar">
+                        <div class="bar-fill" id="dieta-progress-fill"></div>
+                    </div>
+                </div>
+                <div id="dieta-refeicoes"></div>
+                <div style="text-align:center; margin-top:10px; font-size:12px; color:#4a5a7a;">
+                    Toque na refeição para marcar como feita (XP só na 1ª vez do dia)
+                </div>
             </div>
 
-            <div class="card-premium">
-                <div class="card-titulo"><span class="emoji">🥩</span> Dieta para Ganho de Massa</div>
-                <div class="card-desc">Cardápio hipercalórico de 3200 kcal</div>
-                <ul class="card-itens">
-                    <li>🥚 Café — 700 kcal</li>
-                    <li>🍗 Almoço — 900 kcal</li>
-                    <li>🥜 Pré-treino — 500 kcal</li>
-                    <li>🍝 Jantar — 800 kcal</li>
-                    <li>🥛 Ceia — 300 kcal</li>
-                </ul>
-            </div>
+            <div id="sub-medidas" class="sub-conteudo" style="display:none;">
+                <div class="medidas-header">
+                    <h3>📏 Análise Corporal</h3>
+                    <p>Acompanhe sua evolução física</p>
+                </div>
 
-            <div class="secao-titulo">📊 Análise Corporal</div>
-            <div class="card-premium">
-                <div class="card-titulo"><span class="emoji">📏</span> Medidas & Evolução</div>
-                <div class="card-desc">Acompanhe peso, medidas e percentual de gordura</div>
-                <ul class="card-itens">
-                    <li>⚖️ Peso atual: — kg</li>
-                    <li>📏 Cintura: — cm</li>
-                    <li>💪 Braço: — cm</li>
-                    <li>🦵 Coxa: — cm</li>
-                </ul>
+                <button class="btn btn-gold" id="btn-toggle-add-medida" style="margin-bottom:14px;">➕ Adicionar Medidas</button>
+
+                <div class="add-medida-form" id="add-medida-form">
+                    <h4>📝 Nova medição — <span id="data-medicao"></span></h4>
+                    <div class="medida-secao-titulo" style="margin-top:4px;">Dados Pessoais</div>
+                    <div class="campo-medida-triplo">
+                        <div class="campo-medida" style="margin:0;">
+                            <label>⚖️ Peso (kg)</label>
+                            <input type="number" id="inp-peso" step="0.1" placeholder="75.5">
+                        </div>
+                        <div class="campo-medida" style="margin:0;">
+                            <label>📏 Estatura (cm)</label>
+                            <input type="number" id="inp-estatura" step="0.1" placeholder="175">
+                        </div>
+                        <div class="campo-medida" style="margin:0;">
+                            <label>🎂 Idade</label>
+                            <input type="number" id="inp-idade" step="1" placeholder="25">
+                        </div>
+                    </div>
+                    <div class="medida-secao-titulo">Perimetria</div>
+                    <div class="campo-medida">
+                        <label>🫀 Peito (cm)</label>
+                        <input type="number" id="inp-peito" step="0.1" placeholder="Ex: 100">
+                    </div>
+                    <div class="campo-medida">
+                        <label>💪 Ombro (cm)</label>
+                        <input type="number" id="inp-ombro" step="0.1" placeholder="Ex: 120">
+                    </div>
+                    <div class="campo-medida-duplo">
+                        <div class="campo-medida" style="margin:0;">
+                            <label>💪 Braço Esquerdo (cm)</label>
+                            <input type="number" id="inp-braco-esq" step="0.1" placeholder="35">
+                        </div>
+                        <div class="campo-medida" style="margin:0;">
+                            <label>💪 Braço Direito (cm)</label>
+                            <input type="number" id="inp-braco-dir" step="0.1" placeholder="35">
+                        </div>
+                    </div>
+                    <div class="campo-medida" style="margin-top:10px;">
+                        <label>📏 Cintura (cm)</label>
+                        <input type="number" id="inp-cintura" step="0.1" placeholder="Ex: 82">
+                    </div>
+                    <div class="campo-medida-duplo">
+                        <div class="campo-medida" style="margin:0;">
+                            <label>🦵 Coxa Esquerda (cm)</label>
+                            <input type="number" id="inp-coxa-esq" step="0.1" placeholder="55">
+                        </div>
+                        <div class="campo-medida" style="margin:0;">
+                            <label>🦵 Coxa Direita (cm)</label>
+                            <input type="number" id="inp-coxa-dir" step="0.1" placeholder="55">
+                        </div>
+                    </div>
+                    <div class="campo-medida-duplo" style="margin-top:10px;">
+                        <div class="campo-medida" style="margin:0;">
+                            <label>🦶 Perna Esquerda (cm)</label>
+                            <input type="number" id="inp-perna-esq" step="0.1" placeholder="37">
+                        </div>
+                        <div class="campo-medida" style="margin:0;">
+                            <label>🦶 Perna Direita (cm)</label>
+                            <input type="number" id="inp-perna-dir" step="0.1" placeholder="37">
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:8px; margin-top:14px;">
+                        <button class="btn btn-outline" id="btn-cancelar-medida">Cancelar</button>
+                        <button class="btn btn-success" id="btn-salvar-medida">💾 Salvar</button>
+                    </div>
+                </div>
+
+                <div id="medidas-atuais-container"></div>
+
+                <div class="secao-titulo">📊 Histórico de Medições</div>
+                <div id="historico-medidas"></div>
             </div>
 
             <button class="btn btn-outline" id="btn-cancelar-premium" style="margin-top:20px;">Cancelar assinatura</button>
         </div>
 
-        <!-- TELA PERSONAL -->
         <div id="tela-personal" class="tela">
 
             <div class="personal-banner">
                 <h2>🧑‍🏫 Acompanhamento Ativo</h2>
-                <p>Seu personal trainer está cuidando de você!</p>
+                <p id="personal-banner-sub">Seu personal trainer está cuidando de você!</p>
             </div>
 
             <div class="secao-titulo">👨‍💼 Seu Personal</div>
@@ -412,56 +659,54 @@
                 <div class="trainer-info">
                     <div class="nome">Coach Ricardo</div>
                     <div class="especialidade">Hipertrofia • Emagrecimento • Funcional</div>
-                    <div class="status">Online agora</div>
+                    <div class="status" id="trainer-status">Online agora</div>
+                    <div class="ultima-msg" id="trainer-ultima-msg">—</div>
                 </div>
+            </div>
+
+            <div class="quick-actions-row">
+                <button class="btn btn-success" id="qa-checkin">📅<br>Check-in</button>
+                <button class="btn btn-warning" id="qa-ajuste">⚙️<br>Ajuste</button>
+                <button class="btn btn-primary" id="qa-foto">📸<br>Foto</button>
             </div>
 
             <div class="secao-titulo">💬 Conversas</div>
 
             <div class="chat-box">
-                <div class="chat-titulo">Coach Ricardo</div>
-                <div class="msg">
-                    <div class="msg-avatar">🧑‍🏫</div>
-                    <div class="bolha">Fala campeão! Bora ajustar seu treino dessa semana? Vi que você tá indo bem nos agachamentos 💪</div>
+                <div class="chat-titulo">
+                    <span>Coach Ricardo</span>
+                    <span id="chat-status" style="color: #00d2a0;">● Online</span>
                 </div>
-                <div class="msg meu">
-                    <div class="msg-avatar">🐣</div>
-                    <div class="bolha">Bora! Tô sentindo evolução já 🔥</div>
-                </div>
-                <div class="msg">
-                    <div class="msg-avatar">🧑‍🏫</div>
-                    <div class="bolha">Show! Vou aumentar a carga em 5kg no agachamento e no leg press. Mantém a dieta que tá voando ✈️</div>
+                <div class="chat-scroll" id="chat-scroll"></div>
+                <div class="sugestoes-chips" id="sugestoes-chips"></div>
+                <div class="chat-input-row">
+                    <input type="text" id="chat-input" placeholder="Digite sua mensagem..." autocomplete="off">
+                    <button id="chat-enviar" title="Enviar">➤</button>
                 </div>
             </div>
 
             <div class="secao-titulo">📋 Plano Personalizado</div>
+            <div id="personal-plano"></div>
 
-            <div class="plano-personal-item">
-                <div class="titulo">🔥 Treino Personalizado — Semana Atual</div>
-                <div class="desc">Ajustado especificamente para você pelo Coach Ricardo</div>
+            <div class="secao-titulo">📊 Evolução com o Coach</div>
+            <div id="personal-evolucao"></div>
+
+            <div style="display:flex; gap:8px; margin-top:20px;">
+                <button class="btn btn-outline" id="btn-pausar-personal">⏸️ Pausar</button>
+                <button class="btn btn-outline" id="btn-cancelar-personal">❌ Cancelar</button>
             </div>
-
-            <div class="plano-personal-item">
-                <div class="titulo">🥗 Ajuste Nutricional</div>
-                <div class="desc">Aumento de proteína para 2.0g/kg com base no seu objetivo</div>
-            </div>
-
-            <div class="plano-personal-item">
-                <div class="titulo">📊 Check-in Semanal</div>
-                <div class="desc">Próximo check-in: em 3 dias</div>
-            </div>
-
-            <div class="plano-personal-item">
-                <div class="titulo">🎯 Meta Próximo Mês</div>
-                <div class="desc">+3kg de massa magra com -2% de gordura</div>
-            </div>
-
-            <button class="btn btn-outline" id="btn-cancelar-personal" style="margin-top:20px;">Cancelar acompanhamento</button>
         </div>
 
         <div class="modal-overlay" id="modal-config">
             <div class="modal-box">
                 <h2>⚙️ Configurações</h2>
+                <div class="user-card-config">
+                    <div class="uc-avatar" id="cfg-avatar">🐣</div>
+                    <div class="uc-info">
+                        <div class="uc-nome" id="cfg-nome">Jogador</div>
+                        <div class="uc-email" id="cfg-email">—</div>
+                    </div>
+                </div>
                 <div class="config-opcoes">
                     <label>
                         <input type="checkbox" id="chk-modo-serio">
@@ -473,6 +718,7 @@
                     </label>
                 </div>
                 <button class="btn btn-primary" id="btn-fechar-config">Salvar e fechar</button>
+                <button class="btn btn-warning" id="btn-logout" style="margin-top:8px;">🚪 Sair da conta</button>
                 <button class="btn btn-danger" id="btn-resetar" style="margin-top:8px;">🔄 Resetar progresso</button>
             </div>
         </div>
@@ -481,8 +727,8 @@
             <div class="modal-box">
                 <h2>⭐ Plano Premium</h2>
                 <p style="color:#8a9bb5; margin-bottom:12px;">Acesse treinos exclusivos, dietas e planos personalizados.</p>
-                <div class="opcao-premium">
-                    <div class="preco">R$ 29,90 <span style="font-size:14px; color:#8a9bb5;">/mês</span></div>
+                <div style="background: linear-gradient(135deg, #2d1b4e, #1e2634); border: 2px solid #6c5ce7; border-radius: 20px; padding: 16px; margin: 12px 0; text-align: center;">
+                    <div style="font-size: 24px; font-weight: 800; color: #fdcb6e;">R$ 29,90 <span style="font-size:14px; color:#8a9bb5;">/mês</span></div>
                     <div style="font-size:13px; color:#b0c4e0;">Treinos avançados • Dietas • Consultoria</div>
                 </div>
                 <button class="btn btn-success" id="btn-assinar">🔥 Assinar agora</button>
@@ -494,12 +740,61 @@
             <div class="modal-box">
                 <h2>🧑‍🏫 Personal Trainer</h2>
                 <p style="color:#8a9bb5; margin-bottom:12px;">Contrate um profissional para te acompanhar.</p>
-                <div class="opcao-premium">
-                    <div class="preco">R$ 79,90 <span style="font-size:14px; color:#8a9bb5;">/mês</span></div>
+                <div style="background: linear-gradient(135deg, #0a4a3a, #1e2634); border: 2px solid #00d2a0; border-radius: 20px; padding: 16px; margin: 12px 0; text-align: center;">
+                    <div style="font-size: 24px; font-weight: 800; color: #00d2a0;">R$ 79,90 <span style="font-size:14px; color:#8a9bb5;">/mês</span></div>
                     <div style="font-size:13px; color:#b0c4e0;">Acompanhamento 1:1 • Planos exclusivos</div>
                 </div>
                 <button class="btn btn-success" id="btn-contratar">💪 Contratar agora</button>
                 <button class="btn btn-outline" id="btn-fechar-personal">Fechar</button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-checkin">
+            <div class="modal-box">
+                <h2>📅 Check-in Semanal</h2>
+                <p style="color:#8a9bb5; margin-bottom:6px;">Responda rápido e o Coach ajusta seu plano.</p>
+                <div class="form-checkin">
+                    <label>⚖️ Peso atual (kg) — opcional</label>
+                    <input type="number" id="ci-peso" step="0.1" placeholder="Ex: 75.5">
+
+                    <label>⚡ Nível de energia</label>
+                    <div class="escala-botoes" id="ci-energia">
+                        <button type="button" class="esc" data-val="1">1</button>
+                        <button type="button" class="esc" data-val="2">2</button>
+                        <button type="button" class="esc ativo" data-val="3">3</button>
+                        <button type="button" class="esc" data-val="4">4</button>
+                        <button type="button" class="esc" data-val="5">5</button>
+                    </div>
+
+                    <label>😴 Qualidade do sono</label>
+                    <div class="escala-botoes" id="ci-sono">
+                        <button type="button" class="esc" data-val="1">1</button>
+                        <button type="button" class="esc" data-val="2">2</button>
+                        <button type="button" class="esc" data-val="3">3</button>
+                        <button type="button" class="esc" data-val="4">4</button>
+                        <button type="button" class="esc" data-val="5">5</button>
+                    </div>
+
+                    <label>🥗 Adesão à dieta (%)</label>
+                    <input type="number" id="ci-adesao" min="0" max="100" placeholder="Ex: 80">
+
+                    <label>🏋️ Treinos feitos na semana</label>
+                    <input type="number" id="ci-treinos" min="0" placeholder="Ex: 4">
+
+                    <label>📝 Observações</label>
+                    <textarea id="ci-obs" placeholder="Alguma coisa pra contar pro coach?"></textarea>
+                </div>
+                <button class="btn btn-success" id="btn-salvar-checkin" style="margin-top:14px;">✅ Enviar check-in (+50 XP)</button>
+                <button class="btn btn-outline" id="btn-fechar-checkin">Cancelar</button>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="modal-pausar-personal">
+            <div class="modal-box">
+                <h2>⏸️ Pausar Acompanhamento</h2>
+                <p style="color:#b0c4e0; margin-bottom:14px;">Você pode pausar por 1 mês e voltar quando quiser — sem perder seu histórico. O Coach vai entender. 😉</p>
+                <button class="btn btn-warning" id="btn-confirmar-pausa">⏸️ Pausar por 1 mês</button>
+                <button class="btn btn-outline" id="btn-fechar-pausa">Voltar</button>
             </div>
         </div>
 
@@ -588,142 +883,148 @@
 
         const TREINOS = {
             emagrecer: {
-                nome: '🔥 Queima Total',
-                descricao: 'Foco em queimar gordura com circuitos intensos e cardio',
-                tag: 'Objetivo: Emagrecer',
+                nome: '🔥 Queima Total', descricao: 'Foco em queimar gordura com circuitos intensos e cardio', tag: 'Objetivo: Emagrecer',
                 treinos: [
-                    {
-                        id: 'emag_a',
-                        nome: 'Treino A - HIIT',
-                        foco: 'Full Body HIIT',
-                        exercicios: [
-                            { nome: 'Polichinelo', series: 3, reps: '30 seg', descanso: '30s', emoji: '🤸' },
-                            { nome: 'Burpee', series: 3, reps: '10 reps', descanso: '45s', emoji: '💥' },
-                            { nome: 'Agachamento com salto', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦵' },
-                            { nome: 'Mountain Climber', series: 3, reps: '30 seg', descanso: '30s', emoji: '🧗' },
-                            { nome: 'Prancha', series: 3, reps: '40 seg', descanso: '30s', emoji: '🧘' },
-                            { nome: 'Corrida parada', series: 3, reps: '45 seg', descanso: '45s', emoji: '🏃' }
-                        ]
-                    },
-                    {
-                        id: 'emag_b',
-                        nome: 'Treino B - Cardio + Core',
-                        foco: 'Cardio e abdômen',
-                        exercicios: [
-                            { nome: 'Corrida leve', series: 1, reps: '15 min', descanso: '—', emoji: '🏃' },
-                            { nome: 'Abdominal reto', series: 3, reps: '15 reps', descanso: '30s', emoji: '🧱' },
-                            { nome: 'Prancha lateral', series: 3, reps: '30 seg cada', descanso: '30s', emoji: '⚖️' },
-                            { nome: 'Elevação de pernas', series: 3, reps: '12 reps', descanso: '40s', emoji: '🦵' },
-                            { nome: 'Bicicleta', series: 1, reps: '10 min', descanso: '—', emoji: '🚴' },
-                            { nome: 'Alongamento final', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
-                        ]
-                    },
-                    {
-                        id: 'emag_c',
-                        nome: 'Treino C - Circuito',
-                        foco: 'Circuito metabólico',
-                        exercicios: [
-                            { nome: 'Burpee', series: 4, reps: '8 reps', descanso: '30s', emoji: '💥' },
-                            { nome: 'Agachamento livre', series: 4, reps: '15 reps', descanso: '30s', emoji: '🦵' },
-                            { nome: 'Flexão', series: 4, reps: '10 reps', descanso: '30s', emoji: '💪' },
-                            { nome: 'Remada com elástico', series: 4, reps: '12 reps', descanso: '30s', emoji: '🎯' },
-                            { nome: 'Prancha', series: 4, reps: '30 seg', descanso: '30s', emoji: '🧘' },
-                            { nome: 'Abdominal bicicleta', series: 4, reps: '20 reps', descanso: '30s', emoji: '🚴' }
-                        ]
-                    }
+                    { id: 'emag_a', nome: 'Treino A - HIIT', foco: 'Full Body HIIT', exercicios: [
+                        { nome: 'Polichinelo', series: 3, reps: '30 seg', descanso: '30s', emoji: '🤸' },
+                        { nome: 'Burpee', series: 3, reps: '10 reps', descanso: '45s', emoji: '💥' },
+                        { nome: 'Agachamento com salto', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦵' },
+                        { nome: 'Mountain Climber', series: 3, reps: '30 seg', descanso: '30s', emoji: '🧗' },
+                        { nome: 'Prancha', series: 3, reps: '40 seg', descanso: '30s', emoji: '🧘' },
+                        { nome: 'Corrida parada', series: 3, reps: '45 seg', descanso: '45s', emoji: '🏃' }
+                    ]},
+                    { id: 'emag_b', nome: 'Treino B - Cardio + Core', foco: 'Cardio e abdômen', exercicios: [
+                        { nome: 'Corrida leve', series: 1, reps: '15 min', descanso: '—', emoji: '🏃' },
+                        { nome: 'Abdominal reto', series: 3, reps: '15 reps', descanso: '30s', emoji: '🧱' },
+                        { nome: 'Prancha lateral', series: 3, reps: '30 seg cada', descanso: '30s', emoji: '⚖️' },
+                        { nome: 'Elevação de pernas', series: 3, reps: '12 reps', descanso: '40s', emoji: '🦵' },
+                        { nome: 'Bicicleta', series: 1, reps: '10 min', descanso: '—', emoji: '🚴' },
+                        { nome: 'Alongamento final', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
+                    ]},
+                    { id: 'emag_c', nome: 'Treino C - Circuito', foco: 'Circuito metabólico', exercicios: [
+                        { nome: 'Burpee', series: 4, reps: '8 reps', descanso: '30s', emoji: '💥' },
+                        { nome: 'Agachamento livre', series: 4, reps: '15 reps', descanso: '30s', emoji: '🦵' },
+                        { nome: 'Flexão', series: 4, reps: '10 reps', descanso: '30s', emoji: '💪' },
+                        { nome: 'Remada com elástico', series: 4, reps: '12 reps', descanso: '30s', emoji: '🎯' },
+                        { nome: 'Prancha', series: 4, reps: '30 seg', descanso: '30s', emoji: '🧘' },
+                        { nome: 'Abdominal bicicleta', series: 4, reps: '20 reps', descanso: '30s', emoji: '🚴' }
+                    ]}
                 ]
             },
             massa: {
-                nome: '💪 Hipertrofia Total',
-                descricao: 'Divisão ABC clássica para ganho de massa muscular',
-                tag: 'Objetivo: Ganhar massa',
+                nome: '💪 Hipertrofia Total', descricao: 'Divisão ABC clássica para ganho de massa muscular', tag: 'Objetivo: Ganhar massa',
                 treinos: [
-                    {
-                        id: 'massa_a',
-                        nome: 'Treino A - Peito/Tríceps',
-                        foco: 'Peitoral e tríceps',
-                        exercicios: [
-                            { nome: 'Supino reto', series: 4, reps: '10 reps', descanso: '60s', emoji: '🏋️' },
-                            { nome: 'Supino inclinado', series: 3, reps: '10 reps', descanso: '60s', emoji: '📐' },
-                            { nome: 'Crucifixo', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦅' },
-                            { nome: 'Flexão', series: 3, reps: '12 reps', descanso: '45s', emoji: '💪' },
-                            { nome: 'Tríceps testa', series: 3, reps: '12 reps', descanso: '45s', emoji: '🤜' },
-                            { nome: 'Tríceps corda', series: 3, reps: '15 reps', descanso: '45s', emoji: '🪢' }
-                        ]
-                    },
-                    {
-                        id: 'massa_b',
-                        nome: 'Treino B - Costas/Bíceps',
-                        foco: 'Dorsal e bíceps',
-                        exercicios: [
-                            { nome: 'Puxada frontal', series: 4, reps: '10 reps', descanso: '60s', emoji: '🎣' },
-                            { nome: 'Remada curvada', series: 4, reps: '10 reps', descanso: '60s', emoji: '🚣' },
-                            { nome: 'Remada unilateral', series: 3, reps: '12 reps', descanso: '45s', emoji: '🎯' },
-                            { nome: 'Barra fixa', series: 3, reps: '6 reps', descanso: '90s', emoji: '🧗' },
-                            { nome: 'Rosca direta', series: 3, reps: '12 reps', descanso: '45s', emoji: '💪' },
-                            { nome: 'Rosca martelo', series: 3, reps: '12 reps', descanso: '45s', emoji: '🔨' }
-                        ]
-                    },
-                    {
-                        id: 'massa_c',
-                        nome: 'Treino C - Pernas/Ombros',
-                        foco: 'Pernas e ombros',
-                        exercicios: [
-                            { nome: 'Agachamento livre', series: 4, reps: '10 reps', descanso: '90s', emoji: '🦵' },
-                            { nome: 'Leg press', series: 4, reps: '12 reps', descanso: '60s', emoji: '🦿' },
-                            { nome: 'Cadeira extensora', series: 3, reps: '12 reps', descanso: '45s', emoji: '🪑' },
-                            { nome: 'Desenvolvimento', series: 4, reps: '10 reps', descanso: '60s', emoji: '🏋️' },
-                            { nome: 'Elevação lateral', series: 3, reps: '15 reps', descanso: '45s', emoji: '🕊️' },
-                            { nome: 'Panturrilha', series: 4, reps: '20 reps', descanso: '30s', emoji: '🦶' }
-                        ]
-                    }
+                    { id: 'massa_a', nome: 'Treino A - Peito/Tríceps', foco: 'Peitoral e tríceps', exercicios: [
+                        { nome: 'Supino reto', series: 4, reps: '10 reps', descanso: '60s', emoji: '🏋️' },
+                        { nome: 'Supino inclinado', series: 3, reps: '10 reps', descanso: '60s', emoji: '📐' },
+                        { nome: 'Crucifixo', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦅' },
+                        { nome: 'Flexão', series: 3, reps: '12 reps', descanso: '45s', emoji: '💪' },
+                        { nome: 'Tríceps testa', series: 3, reps: '12 reps', descanso: '45s', emoji: '🤜' },
+                        { nome: 'Tríceps corda', series: 3, reps: '15 reps', descanso: '45s', emoji: '🪢' }
+                    ]},
+                    { id: 'massa_b', nome: 'Treino B - Costas/Bíceps', foco: 'Dorsal e bíceps', exercicios: [
+                        { nome: 'Puxada frontal', series: 4, reps: '10 reps', descanso: '60s', emoji: '🎣' },
+                        { nome: 'Remada curvada', series: 4, reps: '10 reps', descanso: '60s', emoji: '🚣' },
+                        { nome: 'Remada unilateral', series: 3, reps: '12 reps', descanso: '45s', emoji: '🎯' },
+                        { nome: 'Barra fixa', series: 3, reps: '6 reps', descanso: '90s', emoji: '🧗' },
+                        { nome: 'Rosca direta', series: 3, reps: '12 reps', descanso: '45s', emoji: '💪' },
+                        { nome: 'Rosca martelo', series: 3, reps: '12 reps', descanso: '45s', emoji: '🔨' }
+                    ]},
+                    { id: 'massa_c', nome: 'Treino C - Pernas/Ombros', foco: 'Pernas e ombros', exercicios: [
+                        { nome: 'Agachamento livre', series: 4, reps: '10 reps', descanso: '90s', emoji: '🦵' },
+                        { nome: 'Leg press', series: 4, reps: '12 reps', descanso: '60s', emoji: '🦿' },
+                        { nome: 'Cadeira extensora', series: 3, reps: '12 reps', descanso: '45s', emoji: '🪑' },
+                        { nome: 'Desenvolvimento', series: 4, reps: '10 reps', descanso: '60s', emoji: '🏋️' },
+                        { nome: 'Elevação lateral', series: 3, reps: '15 reps', descanso: '45s', emoji: '🕊️' },
+                        { nome: 'Panturrilha', series: 4, reps: '20 reps', descanso: '30s', emoji: '🦶' }
+                    ]}
                 ]
             },
             saude: {
-                nome: '🧘 Bem-Estar e Saúde',
-                descricao: 'Treinos leves e funcionais para manter a saúde em dia',
-                tag: 'Objetivo: Manter saúde',
+                nome: '🧘 Bem-Estar e Saúde', descricao: 'Treinos leves e funcionais para manter a saúde em dia', tag: 'Objetivo: Manter saúde',
                 treinos: [
-                    {
-                        id: 'saude_a',
-                        nome: 'Treino A - Mobilidade',
-                        foco: 'Mobilidade e força',
-                        exercicios: [
-                            { nome: 'Alongamento geral', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' },
-                            { nome: 'Agachamento livre', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦵' },
-                            { nome: 'Flexão (joelhos)', series: 3, reps: '10 reps', descanso: '45s', emoji: '💪' },
-                            { nome: 'Ponte de quadril', series: 3, reps: '12 reps', descanso: '45s', emoji: '🌉' },
-                            { nome: 'Prancha', series: 3, reps: '30 seg', descanso: '30s', emoji: '🧘' },
-                            { nome: 'Caminhada', series: 1, reps: '15 min', descanso: '—', emoji: '🚶' }
-                        ]
-                    },
-                    {
-                        id: 'saude_b',
-                        nome: 'Treino B - Equilíbrio',
-                        foco: 'Corpo e equilíbrio',
-                        exercicios: [
-                            { nome: 'Caminhada', series: 1, reps: '20 min', descanso: '—', emoji: '🚶' },
-                            { nome: 'Elevação de pernas', series: 3, reps: '12 reps', descanso: '30s', emoji: '🦵' },
-                            { nome: 'Superman', series: 3, reps: '12 reps', descanso: '30s', emoji: '🦸' },
-                            { nome: 'Prancha lateral', series: 3, reps: '20 seg cada', descanso: '30s', emoji: '⚖️' },
-                            { nome: 'Alongamento', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
-                        ]
-                    },
-                    {
-                        id: 'saude_c',
-                        nome: 'Treino C - Funcional',
-                        foco: 'Leve e funcional',
-                        exercicios: [
-                            { nome: 'Caminhada', series: 1, reps: '15 min', descanso: '—', emoji: '🚶' },
-                            { nome: 'Agachamento livre', series: 3, reps: '10 reps', descanso: '40s', emoji: '🦵' },
-                            { nome: 'Remada com elástico', series: 3, reps: '12 reps', descanso: '40s', emoji: '🎯' },
-                            { nome: 'Abdominal reto', series: 3, reps: '12 reps', descanso: '40s', emoji: '🧱' },
-                            { nome: 'Alongamento', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
-                        ]
-                    }
+                    { id: 'saude_a', nome: 'Treino A - Mobilidade', foco: 'Mobilidade e força', exercicios: [
+                        { nome: 'Alongamento geral', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' },
+                        { nome: 'Agachamento livre', series: 3, reps: '12 reps', descanso: '45s', emoji: '🦵' },
+                        { nome: 'Flexão (joelhos)', series: 3, reps: '10 reps', descanso: '45s', emoji: '💪' },
+                        { nome: 'Ponte de quadril', series: 3, reps: '12 reps', descanso: '45s', emoji: '🌉' },
+                        { nome: 'Prancha', series: 3, reps: '30 seg', descanso: '30s', emoji: '🧘' },
+                        { nome: 'Caminhada', series: 1, reps: '15 min', descanso: '—', emoji: '🚶' }
+                    ]},
+                    { id: 'saude_b', nome: 'Treino B - Equilíbrio', foco: 'Corpo e equilíbrio', exercicios: [
+                        { nome: 'Caminhada', series: 1, reps: '20 min', descanso: '—', emoji: '🚶' },
+                        { nome: 'Elevação de pernas', series: 3, reps: '12 reps', descanso: '30s', emoji: '🦵' },
+                        { nome: 'Superman', series: 3, reps: '12 reps', descanso: '30s', emoji: '🦸' },
+                        { nome: 'Prancha lateral', series: 3, reps: '20 seg cada', descanso: '30s', emoji: '⚖️' },
+                        { nome: 'Alongamento', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
+                    ]},
+                    { id: 'saude_c', nome: 'Treino C - Funcional', foco: 'Leve e funcional', exercicios: [
+                        { nome: 'Caminhada', series: 1, reps: '15 min', descanso: '—', emoji: '🚶' },
+                        { nome: 'Agachamento livre', series: 3, reps: '10 reps', descanso: '40s', emoji: '🦵' },
+                        { nome: 'Remada com elástico', series: 3, reps: '12 reps', descanso: '40s', emoji: '🎯' },
+                        { nome: 'Abdominal reto', series: 3, reps: '12 reps', descanso: '40s', emoji: '🧱' },
+                        { nome: 'Alongamento', series: 1, reps: '5 min', descanso: '—', emoji: '🧘' }
+                    ]}
                 ]
             }
         };
+
+        const DIETAS = {
+            emagrecer: {
+                titulo: '🍽️ Dieta para Emagrecer', kcal: 1800, prot: 130, carb: 180, gord: 55,
+                refeicoes: [
+                    { id: 'cafe', nome: 'Café da manhã', emoji: '☕', hora: '07:00', kcal: 350,
+                      itens: ['2 ovos mexidos', '1 fatia de pão integral', '1/2 mamão', 'Café sem açúcar'] },
+                    { id: 'lanche_manha', nome: 'Lanche da manhã', emoji: '🍎', hora: '10:00', kcal: 200,
+                      itens: ['1 iogurte natural', '1 colher de granola', '1 fruta'] },
+                    { id: 'almoco', nome: 'Almoço', emoji: '🍽️', hora: '12:30', kcal: 600,
+                      itens: ['150g de frango grelhado', '4 col. de arroz integral', '2 col. de feijão', 'Salada à vontade', '1 col. de azeite'] },
+                    { id: 'lanche_tarde', nome: 'Lanche da tarde', emoji: '🥤', hora: '16:00', kcal: 250,
+                      itens: ['1 scoop de whey protein', '1 banana', '1 punhado de amêndoas'] },
+                    { id: 'jantar', nome: 'Jantar', emoji: '🍲', hora: '19:30', kcal: 400,
+                      itens: ['150g de tilápia ou peixe', 'Purê de batata-doce', 'Legumes no vapor', 'Salada verde'] }
+                ]
+            },
+            massa: {
+                titulo: '🍽️ Dieta para Ganhar Massa', kcal: 3200, prot: 180, carb: 400, gord: 90,
+                refeicoes: [
+                    { id: 'cafe', nome: 'Café da manhã', emoji: '🥚', hora: '07:00', kcal: 700,
+                      itens: ['4 ovos mexidos', '3 fatias de pão integral', '2 col. de pasta de amendoim', '1 copo de leite integral', '1 banana'] },
+                    { id: 'lanche_manha', nome: 'Lanche da manhã', emoji: '🥜', hora: '10:00', kcal: 500,
+                      itens: ['1 shake de whey com leite', '30g de castanhas', '1 sanduíche de frango'] },
+                    { id: 'almoco', nome: 'Almoço', emoji: '🍗', hora: '12:30', kcal: 900,
+                      itens: ['200g de carne vermelha ou frango', '6 col. de arroz', '4 col. de feijão', 'Salada com azeite', '1 batata-doce média'] },
+                    { id: 'pre_treino', nome: 'Pré-treino', emoji: '🍌', hora: '16:30', kcal: 500,
+                      itens: ['2 fatias de pão com mel', '1 scoop de whey', '1 banana', '1 café preto'] },
+                    { id: 'jantar', nome: 'Jantar', emoji: '🍝', hora: '20:00', kcal: 800,
+                      itens: ['200g de peito de frango', 'Macarrão integral', 'Molho de tomate caseiro', 'Queijo ralado', 'Salada'] },
+                    { id: 'ceia', nome: 'Ceia', emoji: '🥛', hora: '22:30', kcal: 300,
+                      itens: ['1 iogurte grego', '1 col. de aveia', '1 col. de mel', 'Amendoim'] }
+                ]
+            },
+            saude: {
+                titulo: '🍽️ Dieta Equilibrada', kcal: 2200, prot: 110, carb: 260, gord: 70,
+                refeicoes: [
+                    { id: 'cafe', nome: 'Café da manhã', emoji: '☕', hora: '07:30', kcal: 450,
+                      itens: ['2 ovos mexidos com tomate', '2 fatias de pão integral', '1 fruta da estação', 'Café ou chá'] },
+                    { id: 'lanche_manha', nome: 'Lanche da manhã', emoji: '🍇', hora: '10:00', kcal: 250,
+                      itens: ['1 iogurte natural', 'Frutas picadas', '1 col. de chia'] },
+                    { id: 'almoco', nome: 'Almoço', emoji: '🍛', hora: '12:30', kcal: 700,
+                      itens: ['150g de proteína (frango/peixe)', '4 col. de arroz', '3 col. de feijão', 'Legumes variados', 'Salada verde'] },
+                    { id: 'lanche_tarde', nome: 'Lanche da tarde', emoji: '🥪', hora: '16:00', kcal: 350,
+                      itens: ['Sanduíche integral de atum', '1 suco natural', '1 fruta'] },
+                    { id: 'jantar', nome: 'Jantar', emoji: '🥗', hora: '19:30', kcal: 450,
+                      itens: ['Omelete de 3 ovos', 'Salada completa', '1 fatia de pão integral', 'Chá'] }
+                ]
+            }
+        };
+
+        const SUGESTOES_CHIPS = [
+            'Bora treinar! 💪',
+            'Tô cansado hoje 😴',
+            'Ajusta meu plano',
+            'Tenho uma dúvida'
+        ];
 
         function getDefaultUser() {
             return {
@@ -731,33 +1032,207 @@
                 nivel: 1, xp: 0, totalFlexoes: 0, totalTreinos: 0, streak: 0,
                 ultimoTreino: null, missoesConcluidas: {}, conquistas: [], ultimoLogin: null,
                 exerciciosFeitos: {}, treinosFinalizados: {},
-                assinaturaPremium: false, assinaturaPersonal: false
+                assinaturaPremium: false, assinaturaPersonal: false,
+                refeicoesFeitas: {}, refeicoesXP: {}, medidas: [],
+                chatMensagens: [], mensagensNaoLidas: 0, ultimaProativa: null,
+                checkins: [], personalContratadoEm: null, personalPausadoAte: null
             };
         }
 
         let user = {};
         let diaTreinoAtivo = 0;
+        let subTabPremiumAtiva = 'treinos';
+        let checkinEnergia = 3;
+        let checkinSono = 3;
+        let coachDigitando = false;
+        let finalizandoTreino = false;
 
+        // ============================================================
+        //  AUTENTICAÇÃO
+        // ============================================================
+        function getAccounts() {
+            try {
+                return JSON.parse(localStorage.getItem('levelfit_accounts') || '{}');
+            } catch (e) { return {}; }
+        }
+
+        function saveAccounts(acc) {
+            localStorage.setItem('levelfit_accounts', JSON.stringify(acc));
+        }
+
+        function getSession() {
+            return localStorage.getItem('levelfit_session');
+        }
+
+        function setSession(email) {
+            localStorage.setItem('levelfit_session', email);
+        }
+
+        function clearSession() {
+            localStorage.removeItem('levelfit_session');
+        }
+
+        function isEmailValido(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function criarConta() {
+            const nome = document.getElementById('cad-nome').value.trim();
+            const email = document.getElementById('cad-email').value.trim().toLowerCase();
+            const senha = document.getElementById('cad-senha').value;
+            const objetivo = document.getElementById('cad-objetivo').value;
+            const idade = document.getElementById('cad-idade').value;
+            const estilo = document.querySelector('input[name="cad-estilo"]:checked').value;
+
+            if (!nome) { mostrarToast('⚠️ Digite seu nome'); return; }
+            if (!isEmailValido(email)) { mostrarToast('⚠️ E-mail inválido'); return; }
+            if (!senha || senha.length < 4) { mostrarToast('⚠️ Senha precisa ter 4+ caracteres'); return; }
+
+            const accounts = getAccounts();
+            if (accounts[email]) {
+                mostrarToast('⚠️ Este e-mail já está cadastrado');
+                return;
+            }
+
+            // Cria o user padrão já com os dados do cadastro
+            const novoUser = getDefaultUser();
+            novoUser.nome = nome;
+            novoUser.objetivo = objetivo;
+            novoUser.idade = idade;
+            novoUser.estilo = estilo;
+            novoUser.email = email;
+
+            accounts[email] = { senha, user: novoUser };
+            saveAccounts(accounts);
+            setSession(email);
+            user = novoUser;
+            salvarUser();
+
+            document.getElementById('cad-nome').value = '';
+            document.getElementById('cad-email').value = '';
+            document.getElementById('cad-senha').value = '';
+
+            mostrarToast(`🚀 Bem-vindo, ${nome}!`);
+            mostrarDash();
+        }
+
+        function fazerLogin() {
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
+            const senha = document.getElementById('login-senha').value;
+
+            if (!isEmailValido(email)) { mostrarToast('⚠️ E-mail inválido'); return; }
+            if (!senha) { mostrarToast('⚠️ Digite a senha'); return; }
+
+            const accounts = getAccounts();
+            const acc = accounts[email];
+            if (!acc) { mostrarToast('⚠️ Conta não encontrada'); return; }
+            if (acc.senha !== senha) { mostrarToast('⚠️ Senha incorreta'); return; }
+
+            setSession(email);
+            user = acc.user;
+            // Garante campos novos
+            const def = getDefaultUser();
+            for (let k in def) { if (!(k in user)) user[k] = def[k]; }
+            user.email = email;
+
+            // Reset diário de missões/refeições
+            const hoje = getHoje();
+            if (!user.missoesConcluidas) user.missoesConcluidas = {};
+            if (!user.missoesConcluidas[hoje]) user.missoesConcluidas[hoje] = [];
+            if (!user.refeicoesFeitas) user.refeicoesFeitas = {};
+            if (!user.refeicoesFeitas[hoje]) user.refeicoesFeitas[hoje] = [];
+            if (!user.refeicoesXP) user.refeicoesXP = {};
+            if (!user.refeicoesXP[hoje]) user.refeicoesXP[hoje] = [];
+
+            atualizarStreak();
+            salvarUser();
+
+            document.getElementById('login-email').value = '';
+            document.getElementById('login-senha').value = '';
+
+            mostrarToast(`👋 Bem-vindo de volta, ${user.nome}!`);
+            mostrarDash();
+        }
+
+        function fazerLogout() {
+            if (!confirm('Deseja sair da conta?')) return;
+            salvarUser();
+            clearSession();
+            user = {};
+            fecharModal('modal-config');
+            mostrarAuth();
+            mostrarToast('🚪 Você saiu da conta');
+            // Reset para aba de login
+            trocarAuthTab('login');
+        }
+
+        // ============================================================
+        //  USER / PERSISTÊNCIA
+        // ============================================================
         function carregarUser() {
-            const raw = localStorage.getItem('levelfit_user');
-            if (raw) {
-                try {
-                    user = JSON.parse(raw);
-                    const def = getDefaultUser();
-                    for (let k in def) { if (!(k in user)) user[k] = def[k]; }
-                } catch (e) { user = getDefaultUser(); }
-            } else { user = getDefaultUser(); }
+            const session = getSession();
+            if (!session) return false;
+
+            const accounts = getAccounts();
+            if (!accounts[session]) { clearSession(); return false; }
+
+            user = accounts[session].user;
+            const def = getDefaultUser();
+            for (let k in def) { if (!(k in user)) user[k] = def[k]; }
+            user.email = session;
+
             const hoje = getHoje();
             if (!user.missoesConcluidas) user.missoesConcluidas = {};
             if (!user.missoesConcluidas[hoje]) user.missoesConcluidas[hoje] = [];
             if (!user.exerciciosFeitos) user.exerciciosFeitos = {};
             if (!user.treinosFinalizados) user.treinosFinalizados = {};
+            if (!user.refeicoesFeitas) user.refeicoesFeitas = {};
+            if (!user.refeicoesFeitas[hoje]) user.refeicoesFeitas[hoje] = [];
+            if (!user.refeicoesXP) user.refeicoesXP = {};
+            if (!user.refeicoesXP[hoje]) user.refeicoesXP[hoje] = [];
+            if (!user.medidas) user.medidas = [];
+            if (!user.chatMensagens) user.chatMensagens = [];
+            if (!user.checkins) user.checkins = [];
             atualizarStreak();
             salvarUser();
+            return true;
         }
 
-        function salvarUser() { localStorage.setItem('levelfit_user', JSON.stringify(user)); }
+        function salvarUser() {
+            localStorage.setItem('levelfit_user', JSON.stringify(user));
+            const session = getSession();
+            if (session) {
+                const accounts = getAccounts();
+                if (accounts[session]) {
+                    accounts[session].user = user;
+                    saveAccounts(accounts);
+                }
+            }
+        }
+
         function getHoje() { return new Date().toISOString().split('T')[0]; }
+
+        function formatarData(dataStr) {
+            const [a, m, d] = dataStr.split('-');
+            return `${d}/${m}/${a}`;
+        }
+
+        function formatarHora(ts) {
+            const d = new Date(ts);
+            return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+        }
+
+        function minutosDesde(ts) { return Math.floor((Date.now() - ts) / 60000); }
+
+        function tempoRelativo(ts) {
+            const m = minutosDesde(ts);
+            if (m < 1) return 'agora';
+            if (m < 60) return `há ${m} min`;
+            const h = Math.floor(m / 60);
+            if (h < 24) return `há ${h}h`;
+            const d = Math.floor(h / 24);
+            return `há ${d}d`;
+        }
 
         function atualizarStreak() {
             const hoje = getHoje();
@@ -861,7 +1336,15 @@
             renderConquistas();
             renderRanking();
             document.getElementById('chk-modo-serio').checked = (user.estilo === 'serio');
+            // config card
+            const cfgAvatar = document.getElementById('cfg-avatar');
+            if (cfgAvatar) cfgAvatar.textContent = emoji;
+            const cfgNome = document.getElementById('cfg-nome');
+            if (cfgNome) cfgNome.textContent = user.nome;
+            const cfgEmail = document.getElementById('cfg-email');
+            if (cfgEmail) cfgEmail.textContent = user.email || '—';
             atualizarTabsAssinatura();
+            atualizarBadgePersonal();
         }
 
         function atualizarTabsAssinatura() {
@@ -869,6 +1352,16 @@
             document.getElementById('tab-personal').style.display = user.assinaturaPersonal ? 'flex' : 'none';
             document.getElementById('btn-premium').style.display = user.assinaturaPremium ? 'none' : 'inline-flex';
             document.getElementById('btn-personal').style.display = user.assinaturaPersonal ? 'none' : 'inline-flex';
+        }
+
+        function atualizarBadgePersonal() {
+            const badge = document.getElementById('tab-personal-badge');
+            if (!user.assinaturaPersonal || !user.mensagensNaoLidas || user.mensagensNaoLidas <= 0) {
+                badge.style.display = 'none';
+            } else {
+                badge.textContent = user.mensagensNaoLidas > 9 ? '9+' : user.mensagensNaoLidas;
+                badge.style.display = 'flex';
+            }
         }
 
         function renderMissoes() {
@@ -1013,8 +1506,12 @@
                 mostrarToast('⚠️ Você já finalizou este treino hoje!');
                 return;
             }
-            user.treinosFinalizados[key] = true;
+            if (finalizandoTreino) return;
+            finalizandoTreino = true;
+            const btn = document.getElementById('btn-finalizar-treino');
+            if (btn) { btn.disabled = true; btn.textContent = '✓ Processando...'; }
 
+            user.treinosFinalizados[key] = true;
             if (!user.missoesConcluidas[hoje]) user.missoesConcluidas[hoje] = [];
             if (!user.missoesConcluidas[hoje].includes('treino_completo')) {
                 concluirMissao('treino_completo');
@@ -1022,10 +1519,697 @@
                 adicionarXP(150, 'Treino finalizado');
                 mostrarToast('💪 Treino finalizado! +150 XP');
             }
-
             salvarUser();
             renderTreino();
             atualizarInterface();
+            if (user.assinaturaPersonal) reagirAoUsuario('treino', { treinoId });
+            setTimeout(() => { finalizandoTreino = false; }, 1000);
+        }
+
+        function getDietaAtual() { return DIETAS[user.objetivo] || DIETAS.saude; }
+
+        function renderDieta() {
+            const dieta = getDietaAtual();
+            document.getElementById('dieta-titulo').textContent = dieta.titulo;
+            document.getElementById('dieta-kcal').innerHTML = `${dieta.kcal} <small>kcal / dia</small>`;
+            document.getElementById('dieta-prot').textContent = `Proteína ${dieta.prot}g`;
+            document.getElementById('dieta-carb').textContent = `Carbo ${dieta.carb}g`;
+            document.getElementById('dieta-gord').textContent = `Gordura ${dieta.gord}g`;
+
+            const hoje = getHoje();
+            const feitasHoje = user.refeicoesFeitas[hoje] || [];
+            const container = document.getElementById('dieta-refeicoes');
+            let html = '';
+            dieta.refeicoes.forEach(r => {
+                const feita = feitasHoje.includes(r.id);
+                html += `
+                    <div class="refeicao-card ${feita ? 'feita' : ''}" data-refeicao="${r.id}">
+                        <div class="refeicao-header">
+                            <div class="refeicao-nome">
+                                <span class="refeicao-emoji">${r.emoji}</span>
+                                <span>${r.nome}<span class="refeicao-hora">${r.hora}</span></span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:6px;">
+                                <span class="refeicao-kcal">${r.kcal} kcal</span>
+                                <span class="refeicao-status">${feita ? '✓' : '○'}</span>
+                            </div>
+                        </div>
+                        <ul class="refeicao-itens">
+                            ${r.itens.map(i => `<li>${i}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+
+            const total = dieta.refeicoes.length;
+            const feitas = feitasHoje.length;
+            const pct = total ? (feitas / total) * 100 : 0;
+            document.getElementById('dieta-progress-fill').style.width = pct + '%';
+            document.getElementById('dieta-progress-text').textContent = `${feitas}/${total}`;
+
+            container.querySelectorAll('[data-refeicao]').forEach(el => {
+                el.addEventListener('click', () => {
+                    toggleRefeicao(el.dataset.refeicao);
+                });
+            });
+        }
+
+        function toggleRefeicao(id) {
+            const hoje = getHoje();
+            if (!user.refeicoesFeitas[hoje]) user.refeicoesFeitas[hoje] = [];
+            if (!user.refeicoesXP) user.refeicoesXP = {};
+            if (!user.refeicoesXP[hoje]) user.refeicoesXP[hoje] = [];
+
+            const arr = user.refeicoesFeitas[hoje];
+            const arrXP = user.refeicoesXP[hoje];
+            const idx = arr.indexOf(id);
+            const dieta = getDietaAtual();
+            const refeicao = dieta.refeicoes.find(r => r.id === id);
+
+            if (idx >= 0) {
+                arr.splice(idx, 1);
+                mostrarToast(`↩️ ${refeicao.nome} desmarcada`);
+            } else {
+                arr.push(id);
+                if (!arrXP.includes(id)) {
+                    arrXP.push(id);
+                    adicionarXP(15, `Refeição: ${refeicao.nome}`);
+                    mostrarToast(`🍽️ ${refeicao.nome} ✓ +15 XP`);
+                    if (user.assinaturaPersonal) reagirAoUsuario('refeicao', { refeicao });
+                } else {
+                    mostrarToast(`🍽️ ${refeicao.nome} marcada (XP já contabilizado hoje)`);
+                }
+            }
+            salvarUser();
+            renderDieta();
+        }
+
+        const CAMPOS_MEDIDA = [
+            { key: 'peso', label: '⚖️ Peso', unidade: 'kg' },
+            { key: 'estatura', label: '📏 Estatura', unidade: 'cm' },
+            { key: 'idade', label: '🎂 Idade', unidade: 'anos' },
+            { key: 'peito', label: '🫀 Peito', unidade: 'cm' },
+            { key: 'ombro', label: '💪 Ombro', unidade: 'cm' },
+            { key: 'bracoEsq', label: '💪 Braço Esq.', unidade: 'cm' },
+            { key: 'bracoDir', label: '💪 Braço Dir.', unidade: 'cm' },
+            { key: 'cintura', label: '📏 Cintura', unidade: 'cm' },
+            { key: 'coxaEsq', label: '🦵 Coxa Esq.', unidade: 'cm' },
+            { key: 'coxaDir', label: '🦵 Coxa Dir.', unidade: 'cm' },
+            { key: 'pernaEsq', label: '🦶 Perna Esq.', unidade: 'cm' },
+            { key: 'pernaDir', label: '🦶 Perna Dir.', unidade: 'cm' }
+        ];
+
+        function renderMedidas() {
+            const container = document.getElementById('medidas-atuais-container');
+            if (!user.medidas.length) {
+                container.innerHTML = `
+                    <div style="background: #1e2634; border-radius: 16px; padding: 22px; text-align: center; border: 2px dashed #2a3344; margin-bottom: 10px;">
+                        <div style="font-size: 36px; margin-bottom: 8px;">📏</div>
+                        <div style="font-size: 14px; color: #8a9bb5; font-weight: 600;">Nenhuma medição registrada</div>
+                        <div style="font-size: 12px; color: #4a5a7a; margin-top: 6px;">Toque em "Adicionar Medidas" para começar!</div>
+                    </div>`;
+            } else {
+                const atual = user.medidas[user.medidas.length - 1];
+                const anterior = user.medidas.length > 1 ? user.medidas[user.medidas.length - 2] : null;
+
+                function deltaHtml(key, unidade) {
+                    if (!anterior || anterior[key] == null || atual[key] == null) return '';
+                    const dif = atual[key] - anterior[key];
+                    if (Math.abs(dif) < 0.05) return '';
+                    const cls = dif > 0 ? 'pos' : 'neg';
+                    const sinal = dif > 0 ? '+' : '';
+                    const und = unidade === 'anos' ? '' : unidade;
+                    return `<div class="delta ${cls}">${sinal}${dif.toFixed(1)} ${und}</div>`;
+                }
+
+                let html = '<div class="medida-secao-titulo">Dados Pessoais</div><div class="medida-atual-grid">';
+                ['peso','estatura','idade'].forEach(k => {
+                    const c = CAMPOS_MEDIDA.find(x => x.key === k);
+                    if (atual[k] == null) return;
+                    html += `
+                        <div class="medida-box">
+                            <div class="label">${c.label}</div>
+                            <div class="valor">${atual[k]}<small> ${c.unidade}</small></div>
+                            ${deltaHtml(k, c.unidade)}
+                        </div>`;
+                });
+                html += '</div>';
+
+                const temPeri = ['peito','ombro','bracoEsq','bracoDir','cintura','coxaEsq','coxaDir','pernaEsq','pernaDir'].some(k => atual[k] != null);
+                if (temPeri) {
+                    html += '<div class="medida-secao-titulo">Perimetria</div><div class="medida-atual-grid">';
+                    ['peito','ombro','bracoEsq','bracoDir','cintura','coxaEsq','coxaDir','pernaEsq','pernaDir'].forEach(k => {
+                        const c = CAMPOS_MEDIDA.find(x => x.key === k);
+                        if (atual[k] == null) return;
+                        html += `
+                            <div class="medida-box">
+                                <div class="label">${c.label}</div>
+                                <div class="valor">${atual[k]}<small> ${c.unidade}</small></div>
+                                ${deltaHtml(k, c.unidade)}
+                            </div>`;
+                    });
+                    html += '</div>';
+                }
+                container.innerHTML = html;
+            }
+
+            const histContainer = document.getElementById('historico-medidas');
+            if (!user.medidas.length) {
+                histContainer.innerHTML = `<div style="text-align:center; padding:20px; color:#4a5a7a; font-size:13px;">Sem histórico ainda</div>`;
+            } else {
+                const reversed = [...user.medidas].reverse();
+                histContainer.innerHTML = reversed.map(m => {
+                    let valoresHtml = '';
+                    const dados = [];
+                    if (m.peso != null) dados.push(`<span>⚖️ Peso <b>${m.peso}kg</b></span>`);
+                    if (m.estatura != null) dados.push(`<span>📏 Est. <b>${m.estatura}cm</b></span>`);
+                    if (m.idade != null) dados.push(`<span>🎂 Idade <b>${m.idade}</b></span>`);
+                    if (dados.length) valoresHtml += `<div class="valores-grid">${dados.join('')}</div>`;
+
+                    const peri = [];
+                    if (m.peito != null) peri.push(`<span>🫀 Peito <b>${m.peito}cm</b></span>`);
+                    if (m.ombro != null) peri.push(`<span>💪 Ombro <b>${m.ombro}cm</b></span>`);
+                    if (m.bracoEsq != null) peri.push(`<span>💪 Br. E <b>${m.bracoEsq}cm</b></span>`);
+                    if (m.bracoDir != null) peri.push(`<span>💪 Br. D <b>${m.bracoDir}cm</b></span>`);
+                    if (m.cintura != null) peri.push(`<span>📏 Cintura <b>${m.cintura}cm</b></span>`);
+                    if (m.coxaEsq != null) peri.push(`<span>🦵 Cx. E <b>${m.coxaEsq}cm</b></span>`);
+                    if (m.coxaDir != null) peri.push(`<span>🦵 Cx. D <b>${m.coxaDir}cm</b></span>`);
+                    if (m.pernaEsq != null) peri.push(`<span>🦶 Pr. E <b>${m.pernaEsq}cm</b></span>`);
+                    if (m.pernaDir != null) peri.push(`<span>🦶 Pr. D <b>${m.pernaDir}cm</b></span>`);
+                    if (peri.length) {
+                        valoresHtml += `<div style="font-size:10px; font-weight:700; color:#6c5ce7; text-transform:uppercase; letter-spacing:1px; margin:8px 0 4px;">Perimetria</div>`;
+                        valoresHtml += `<div class="valores-grid">${peri.join('')}</div>`;
+                    }
+
+                    return `
+                        <div class="historico-item">
+                            <div class="data">
+                                <span>${formatarData(m.data)}</span>
+                                <small>${m.hora || ''}</small>
+                            </div>
+                            ${valoresHtml}
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        function abrirFormMedida() {
+            const form = document.getElementById('add-medida-form');
+            form.classList.add('ativo');
+            document.getElementById('btn-toggle-add-medida').style.display = 'none';
+            document.getElementById('data-medicao').textContent = formatarData(getHoje());
+            ['inp-peso','inp-estatura','inp-idade','inp-peito','inp-ombro','inp-braco-esq','inp-braco-dir','inp-cintura','inp-coxa-esq','inp-coxa-dir','inp-perna-esq','inp-perna-dir'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
+            form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function fecharFormMedida() {
+            document.getElementById('add-medida-form').classList.remove('ativo');
+            document.getElementById('btn-toggle-add-medida').style.display = 'inline-flex';
+        }
+
+        function salvarMedida() {
+            const campos = {
+                peso: parseFloat(document.getElementById('inp-peso').value),
+                estatura: parseFloat(document.getElementById('inp-estatura').value),
+                idade: parseFloat(document.getElementById('inp-idade').value),
+                peito: parseFloat(document.getElementById('inp-peito').value),
+                ombro: parseFloat(document.getElementById('inp-ombro').value),
+                bracoEsq: parseFloat(document.getElementById('inp-braco-esq').value),
+                bracoDir: parseFloat(document.getElementById('inp-braco-dir').value),
+                cintura: parseFloat(document.getElementById('inp-cintura').value),
+                coxaEsq: parseFloat(document.getElementById('inp-coxa-esq').value),
+                coxaDir: parseFloat(document.getElementById('inp-coxa-dir').value),
+                pernaEsq: parseFloat(document.getElementById('inp-perna-esq').value),
+                pernaDir: parseFloat(document.getElementById('inp-perna-dir').value)
+            };
+            const preenchidos = Object.values(campos).filter(v => !isNaN(v) && v > 0);
+            if (!preenchidos.length) {
+                mostrarToast('⚠️ Preencha pelo menos um campo!');
+                return;
+            }
+
+            const agora = new Date();
+            const hora = `${String(agora.getHours()).padStart(2,'0')}:${String(agora.getMinutes()).padStart(2,'0')}`;
+
+            const medida = { data: getHoje(), hora };
+            for (let k in campos) {
+                if (!isNaN(campos[k]) && campos[k] > 0) medida[k] = campos[k];
+            }
+
+            user.medidas.push(medida);
+            salvarUser();
+            fecharFormMedida();
+            renderMedidas();
+            adicionarXP(20, 'Medida registrada');
+            mostrarToast('📏 Medidas salvas! +20 XP');
+            if (user.assinaturaPersonal) reagirAoUsuario('medida', { medida });
+        }
+
+        function trocarSubTabPremium(sub) {
+            subTabPremiumAtiva = sub;
+            document.querySelectorAll('#subtabs-premium .subtab').forEach(t => {
+                t.classList.toggle('ativa', t.dataset.sub === sub);
+            });
+            document.getElementById('sub-treinos').style.display = sub === 'treinos' ? 'block' : 'none';
+            document.getElementById('sub-dieta').style.display = sub === 'dieta' ? 'block' : 'none';
+            document.getElementById('sub-medidas').style.display = sub === 'medidas' ? 'block' : 'none';
+            if (sub === 'dieta') renderDieta();
+            if (sub === 'medidas') renderMedidas();
+        }
+
+        function getStatusCoach() {
+            const h = new Date().getHours();
+            if (h >= 22 || h < 6) return { label: 'Offline — responde em breve', cls: 'offline', short: '● Offline' };
+            if (h >= 12 && h < 14) return { label: 'Em treino agora', cls: 'treino', short: '● Em treino' };
+            return { label: 'Online agora', cls: '', short: '● Online' };
+        }
+
+        function getUltimaMensagem() {
+            if (!user.chatMensagens.length) return null;
+            return user.chatMensagens[user.chatMensagens.length - 1];
+        }
+
+        function adicionarMensagem(de, texto, opts = {}) {
+            const msg = {
+                id: 'm_' + Date.now() + '_' + Math.floor(Math.random() * 999),
+                de, texto, ts: Date.now()
+            };
+            user.chatMensagens.push(msg);
+            if (user.chatMensagens.length > 100) user.chatMensagens = user.chatMensagens.slice(-100);
+            if (de === 'coach' && !opts.silenciosa) {
+                if (!user.assinaturaPersonal) return;
+                const estaNaTelaPersonal = document.getElementById('tela-personal').classList.contains('ativa');
+                if (!estaNaTelaPersonal) {
+                    user.mensagensNaoLidas = (user.mensagensNaoLidas || 0) + 1;
+                    atualizarBadgePersonal();
+                    mostrarToast(`💬 Coach Ricardo: ${texto.substring(0, 40)}${texto.length > 40 ? '...' : ''}`);
+                }
+            }
+            salvarUser();
+            renderChat();
+        }
+
+        function renderChat() {
+            const scroll = document.getElementById('chat-scroll');
+            if (!scroll) return;
+            let html = '';
+            const avatarUser = getAvatarEmoji(user.nivel);
+            user.chatMensagens.forEach(m => {
+                const hora = formatarHora(m.ts);
+                if (m.de === 'coach') {
+                    html += `
+                        <div class="msg coach">
+                            <div class="msg-avatar">🧑‍🏫</div>
+                            <div class="bolha">${escapeHtml(m.texto)}</div>
+                            <div class="msg-hora">${hora}</div>
+                        </div>`;
+                } else {
+                    html += `
+                        <div class="msg meu">
+                            <div class="msg-avatar">${avatarUser}</div>
+                            <div class="bolha">${escapeHtml(m.texto)}</div>
+                            <div class="msg-hora">${hora}</div>
+                        </div>`;
+                }
+            });
+            if (coachDigitando) {
+                html += `
+                    <div class="msg coach msg-digitando">
+                        <div class="msg-avatar">🧑‍🏫</div>
+                        <div class="bolha"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+                    </div>`;
+            }
+            scroll.innerHTML = html;
+            scroll.scrollTop = scroll.scrollHeight;
+        }
+
+        function escapeHtml(t) {
+            return t.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function renderSugestoesChips() {
+            const c = document.getElementById('sugestoes-chips');
+            c.innerHTML = SUGESTOES_CHIPS.map(s => `<button class="sugestao-chip" data-sug="${s}">${s}</button>`).join('');
+            c.querySelectorAll('[data-sug]').forEach(b => {
+                b.addEventListener('click', () => {
+                    document.getElementById('chat-input').value = b.dataset.sug;
+                    enviarMensagemUsuario();
+                });
+            });
+        }
+
+        function enviarMensagemUsuario() {
+            const inp = document.getElementById('chat-input');
+            const txt = inp.value.trim();
+            if (!txt) return;
+            inp.value = '';
+            adicionarMensagem('user', txt);
+            gerarRespostaCoach(txt);
+        }
+
+        function gerarRespostaCoach(mensagemUsuario) {
+            coachDigitando = true;
+            renderChat();
+            const msgLower = mensagemUsuario.toLowerCase();
+            const delay = 900 + Math.random() * 1000;
+
+            setTimeout(() => {
+                coachDigitando = false;
+                let resposta = '';
+                if (msgLower.includes('bora') || msgLower.includes('treinar') || msgLower.includes('vamos')) {
+                    const treinoNome = getPlanoAtual().treinos[diaTreinoAtivo]?.nome || 'treino';
+                    resposta = `Boa! Então vamos de ${treinoNome} hoje 💪 Foca na execução, sem pressa!`;
+                } else if (msgLower.includes('cansad') || msgLower.includes('exaust') || msgLower.includes('sem energia')) {
+                    resposta = 'Entendo, bodybuilder também tem dia ruim. Faz um treino leve — 20 min de caminhada e alongamento. O importante é não quebrar o ritmo! 🚶‍♂️';
+                } else if (msgLower.includes('ajust') || msgLower.includes('plano') || msgLower.includes('mudar')) {
+                    const obj = user.objetivo === 'massa' ? 'ganhar mais massa' : user.objetivo === 'emagrecer' ? 'queimar mais gordura' : 'manter a saúde';
+                    resposta = `Recebi seu pedido de ajuste! Pelo seu objetivo de ${obj} e nível ${user.nivel}, vou reforçar o volume nos próximos dias. Fica ligado nas atualizações! 📈`;
+                } else if (msgLower.includes('dúvida') || msgLower.includes('duvida') || msgLower.includes('como')) {
+                    resposta = 'Manda a dúvida específica: técnica de execução, dieta, descanso ou frequência? Assim eu te respondo direito 🤓';
+                } else if (msgLower.includes('dor') || msgLower.includes('machuc') || msgLower.includes('lesão') || msgLower.includes('lesao')) {
+                    resposta = '⚠️ Cuidado, hein! Lesão não é brincadeira. Reduz a carga, alonga bem e se persistir, procura um fisioterapeuta. Não força!';
+                } else if (msgLower.includes('obrigad') || msgLower.includes('valeu') || msgLower.includes('vlw')) {
+                    resposta = 'Tamo junto! 💚 Conta comigo sempre.';
+                } else if (msgLower.includes('dieta')) {
+                    resposta = 'Sobre a dieta: foca em bater a proteína primeiro, depois carbo e gordura. Se ficar com fome, aumenta salada e vegetais! 🥗';
+                } else if (msgLower.includes('oi') || msgLower.includes('olá') || msgLower.includes('ola') || msgLower.includes('e aí') || msgLower.includes('eai')) {
+                    resposta = `Fala ${user.nome}! 💪 Bora pra cima hoje? Como tá se sentindo?`;
+                } else {
+                    const genericas = [
+                        'Anotado! 📝 Vou levar isso em conta no seu plano.',
+                        'Boa, gostei da disposição! Continua nesse ritmo 💚',
+                        'Show! Qualquer coisa é só chamar.',
+                        'Entendi! Bora ajustar isso aos poucos, sem pressa. 🎯',
+                        'Isso aí! Consistência bate intensidade sempre. 🔥'
+                    ];
+                    resposta = genericas[Math.floor(Math.random() * genericas.length)];
+                }
+                adicionarMensagem('coach', resposta);
+            }, delay);
+        }
+
+        function reagirAoUsuario(tipo, dados) {
+            if (!user.assinaturaPersonal) return;
+            let txt = '';
+            switch (tipo) {
+                case 'treino': {
+                    const nomes = { emag_a:'Treino A (HIIT)', emag_b:'Treino B (Cardio+Core)', emag_c:'Treino C (Circuito)',
+                        massa_a:'Treino A (Peito/Tríceps)', massa_b:'Treino B (Costas/Bíceps)', massa_c:'Treino C (Pernas/Ombros)',
+                        saude_a:'Treino A (Mobilidade)', saude_b:'Treino B (Equilíbrio)', saude_c:'Treino C (Funcional)' };
+                    const nome = nomes[dados.treinoId] || 'treino';
+                    const ops = [
+                        `Vi que mandou bem no ${nome}! 💪 Como foi a sensação?`,
+                        `Boa, treino concluído! ${nome} feito ✅ Descanso merecido!`,
+                        `Fechou o ${nome} hein? Tá voando! 🔥`
+                    ];
+                    txt = ops[Math.floor(Math.random() * ops.length)];
+                    break;
+                }
+                case 'medida': {
+                    const m = dados.medida;
+                    if (user.medidas.length >= 2) {
+                        const ant = user.medidas[user.medidas.length - 2];
+                        if (m.peso != null && ant.peso != null) {
+                            const dif = m.peso - ant.peso;
+                            if (Math.abs(dif) >= 0.3) {
+                                if (dif < 0 && user.objetivo === 'emagrecer') txt = `Perdeu ${Math.abs(dif).toFixed(1)}kg! Show de bola! 🎉`;
+                                else if (dif > 0 && user.objetivo === 'massa') txt = `Ganhou ${dif.toFixed(1)}kg de massa! 💪 Bora continuar!`;
+                                else txt = `Peso mudou ${dif > 0 ? '+' : ''}${dif.toFixed(1)}kg. Vamos analisar juntos! 📊`;
+                            }
+                        }
+                        if (!txt && m.cintura != null && ant.cintura != null) {
+                            const dif = m.cintura - ant.cintura;
+                            if (Math.abs(dif) >= 0.5) txt = `Cintura variou ${dif > 0 ? '+' : ''}${dif.toFixed(1)}cm. ${dif < 0 ? 'Mandou bem!' : 'Atenção na dieta!'} 📏`;
+                        }
+                    }
+                    if (!txt) txt = 'Vi que você registrou novas medidas! 📏 Bora acompanhar a evolução juntos!';
+                    break;
+                }
+                case 'nivel': {
+                    txt = `UAU! Subiu pro nível ${user.nivel} — ${getNomeNivel(user.nivel, user.estilo)}! Que evolução 🚀`;
+                    break;
+                }
+                case 'refeicao': {
+                    const ops = [
+                        `Boa! ${dados.refeicao.nome} registrada ✅ Continua batendo a dieta!`,
+                        `${dados.refeicao.nome} feita, isso aí! 🍽️ Nutrição é 70% do resultado.`,
+                        `Boa adesão! ${dados.refeicao.nome} ✓`
+                    ];
+                    txt = ops[Math.floor(Math.random() * ops.length)];
+                    break;
+                }
+                default: return;
+            }
+            if (txt) setTimeout(() => adicionarMensagem('coach', txt), 1500 + Math.random() * 1000);
+        }
+
+        function dispararMensagensProativas() {
+            if (!user.assinaturaPersonal) return;
+            const hoje = getHoje();
+            if (user.ultimaProativa === hoje) return;
+            let txt = '';
+            if (user.ultimoTreino) {
+                const diff = Math.floor((new Date(hoje) - new Date(user.ultimoTreino)) / 86400000);
+                if (diff >= 3) txt = `Sumiu, hein? 😅 Já são ${diff} dias sem treinar. Bora voltar hoje, nem que seja 15 min!`;
+                else if (diff >= 2) txt = `Faz ${diff} dias desde o último treino. Bora não perder o ritmo! 💪`;
+            }
+            if (!txt && user.streak >= 3) {
+                txt = `${user.streak} dias seguidos de streak! 🔥 Tá inspirador, hein!`;
+            }
+            if (!txt) {
+                const ultimoCheckin = user.checkins[user.checkins.length - 1];
+                if (ultimoCheckin) {
+                    const dias = Math.floor((new Date(hoje) - new Date(ultimoCheckin.data)) / 86400000);
+                    if (dias >= 8) txt = `Já faz ${dias} dias desde o último check-in. Bora atualizar as medidas? 📅`;
+                } else if (user.personalContratadoEm) {
+                    const dias = Math.floor((new Date(hoje) - new Date(user.personalContratadoEm)) / 86400000);
+                    if (dias >= 7) txt = `Já se passou uma semana! Vamos fazer o primeiro check-in? 📅`;
+                }
+            }
+            if (txt) {
+                user.ultimaProativa = hoje;
+                salvarUser();
+                setTimeout(() => adicionarMensagem('coach', txt), 800);
+            }
+        }
+
+        function renderPlanoPersonal() {
+            const c = document.getElementById('personal-plano');
+            const plano = getPlanoAtual();
+            const treinoAtual = plano.treinos[diaTreinoAtivo] || plano.treinos[0];
+
+            let treinoStatus = 'Não iniciado';
+            if (user.ultimoTreino) {
+                const diff = Math.floor((new Date(getHoje()) - new Date(user.ultimoTreino)) / 86400000);
+                if (diff === 0) treinoStatus = 'Feito hoje ✅';
+                else if (diff === 1) treinoStatus = 'Feito ontem';
+                else treinoStatus = `Há ${diff} dias`;
+            }
+
+            let ajusteNutri = 'Registre seu peso para calcular';
+            const ultimaMedida = user.medidas[user.medidas.length - 1];
+            if (ultimaMedida && ultimaMedida.peso) {
+                const protPorKg = user.objetivo === 'massa' ? 2.0 : user.objetivo === 'emagrecer' ? 1.8 : 1.6;
+                const protTotal = Math.round(ultimaMedida.peso * protPorKg);
+                ajusteNutri = `${protPorKg}g de proteína por kg → ~${protTotal}g/dia`;
+            }
+
+            const ultimoCheckin = user.checkins[user.checkins.length - 1];
+            let proximoCheckinData;
+            if (ultimoCheckin) {
+                const d = new Date(ultimoCheckin.data);
+                d.setDate(d.getDate() + 7);
+                proximoCheckinData = d.toISOString().split('T')[0];
+            } else if (user.personalContratadoEm) {
+                const d = new Date(user.personalContratadoEm);
+                d.setDate(d.getDate() + 7);
+                proximoCheckinData = d.toISOString().split('T')[0];
+            } else {
+                proximoCheckinData = getHoje();
+            }
+            const checkinAtrasado = new Date(proximoCheckinData) <= new Date(getHoje());
+
+            let meta;
+            if (user.objetivo === 'emagrecer') meta = 'Perder 2kg em 30 dias com déficit controlado';
+            else if (user.objetivo === 'massa') meta = 'Ganhar 3kg de massa magra em 30 dias';
+            else meta = 'Manter o ritmo, evoluir condicionamento';
+
+            const alertas = [];
+            if (user.streak === 0 && user.ultimoTreino) {
+                const diff = Math.floor((new Date(getHoje()) - new Date(user.ultimoTreino)) / 86400000);
+                if (diff >= 3) alertas.push({ txt: `⚠️ Sem treinar há ${diff} dias. Bora reativar!` });
+            }
+            if (checkinAtrasado) alertas.push({ txt: '📅 Seu check-in semanal está em atraso' });
+
+            let html = '';
+            html += `
+                <div class="plano-personal-item">
+                    <div class="titulo">🔥 Treino da semana <span class="tag">${treinoStatus}</span></div>
+                    <div class="desc"><b>${treinoAtual.nome}</b> — ${treinoAtual.exercicios.length} exercícios · ${treinoAtual.foco}</div>
+                </div>`;
+            html += `
+                <div class="plano-personal-item">
+                    <div class="titulo">🥗 Ajuste nutricional</div>
+                    <div class="desc">${ajusteNutri}</div>
+                </div>`;
+            html += `
+                <div class="plano-personal-item ${checkinAtrasado ? 'alerta' : ''}">
+                    <div class="titulo">📊 Próximo check-in <span class="tag">${checkinAtrasado ? 'ATRASADO' : 'EM DIA'}</span></div>
+                    <div class="desc">Data sugerida: ${formatarData(proximoCheckinData)}</div>
+                    <button class="btn btn-success btn-pequeno" id="btn-plano-checkin">Fazer check-in agora</button>
+                </div>`;
+            html += `
+                <div class="plano-personal-item">
+                    <div class="titulo">🎯 Meta do próximo mês</div>
+                    <div class="desc">${meta}</div>
+                </div>`;
+            alertas.forEach(a => {
+                html += `
+                    <div class="plano-personal-item alerta">
+                        <div class="titulo">🚨 Alerta do Coach</div>
+                        <div class="desc">${a.txt}</div>
+                    </div>`;
+            });
+            c.innerHTML = html;
+            const btnCheck = document.getElementById('btn-plano-checkin');
+            if (btnCheck) btnCheck.addEventListener('click', abrirCheckin);
+        }
+
+        function renderEvolucao() {
+            const c = document.getElementById('personal-evolucao');
+            const comPeso = user.medidas.filter(m => m.peso != null).slice(-6);
+
+            let tempoAcomp = '—';
+            if (user.personalContratadoEm) {
+                const dias = Math.max(0, Math.floor((new Date(getHoje()) - new Date(user.personalContratadoEm)) / 86400000));
+                tempoAcomp = dias === 0 ? 'hoje' : `${dias} dia${dias > 1 ? 's' : ''}`;
+            }
+
+            let html = '';
+
+            if (comPeso.length >= 2) {
+                const pesos = comPeso.map(m => m.peso);
+                const max = Math.max(...pesos);
+                const min = Math.min(...pesos);
+                const range = max - min || 1;
+                html += `<div class="evolucao-card"><div class="titulo">⚖️ Evolução do peso</div><div class="grafico-barras">`;
+                comPeso.forEach(m => {
+                    const h = 20 + ((m.peso - min) / range) * 70;
+                    const [a, mm, d] = m.data.split('-');
+                    html += `<div class="barra-item">
+                        <div class="barra-valor">${m.peso}</div>
+                        <div class="barra" style="height: ${h}px;"></div>
+                        <div class="barra-data">${d}/${mm}</div>
+                    </div>`;
+                });
+                html += `</div></div>`;
+
+                const prim = comPeso[0];
+                const ult = comPeso[comPeso.length - 1];
+                const dif = (ult.peso - prim.peso).toFixed(1);
+                const difTxt = dif > 0 ? `+${dif}` : dif;
+                const cls = (user.objetivo === 'emagrecer' && dif < 0) || (user.objetivo === 'massa' && dif > 0) ? 'pos' : 'neg';
+                html += `<div class="evolucao-card">
+                    <div class="titulo">📊 Comparativo de peso</div>
+                    <div class="comparativo-grid">
+                        <div class="label-c">Primeira medição</div>
+                        <div></div>
+                        <div class="label-c">Atual</div>
+                        <div class="valor-a">${prim.peso}kg</div>
+                        <div class="seta">→</div>
+                        <div class="valor-b">${ult.peso}kg</div>
+                    </div>
+                    <div style="text-align:center; font-size: 12px; font-weight: 700; margin-top:6px;" class="delta ${cls}">Variação: ${difTxt}kg</div>
+                </div>`;
+            } else {
+                html += `<div class="evolucao-card">
+                    <div class="titulo">⚖️ Evolução do peso</div>
+                    <div style="text-align:center; color:#4a5a7a; font-size:13px; padding: 12px 0;">Registre pelo menos 2 pesos para ver o gráfico</div>
+                </div>`;
+            }
+
+            html += `<div class="evolucao-card">
+                <div class="titulo">📈 Estatísticas com o Coach</div>
+                <div class="stats-grid">
+                    <div class="stat-box"><div class="v">${user.checkins.length}</div><div class="l">Check-ins</div></div>
+                    <div class="stat-box"><div class="v">${tempoAcomp}</div><div class="l">Acompanhamento</div></div>
+                    <div class="stat-box"><div class="v">${user.totalTreinos}</div><div class="l">Treinos totais</div></div>
+                    <div class="stat-box"><div class="v">${user.medidas.length}</div><div class="l">Medições</div></div>
+                </div>
+                <button class="btn btn-outline" id="btn-compartilhar-progresso" style="margin-top:12px;">📤 Compartilhar progresso no chat</button>
+            </div>`;
+
+            c.innerHTML = html;
+            const btn = document.getElementById('btn-compartilhar-progresso');
+            if (btn) btn.addEventListener('click', compartilharProgresso);
+        }
+
+        function compartilharProgresso() {
+            const ultima = user.medidas[user.medidas.length - 1];
+            let txt = `📊 Meu progresso: Nível ${user.nivel} (${getNomeNivel(user.nivel, user.estilo)}) · ${user.totalTreinos} treinos · ${user.checkins.length} check-ins`;
+            if (ultima && ultima.peso) txt += ` · Peso atual: ${ultima.peso}kg`;
+            adicionarMensagem('user', txt);
+            setTimeout(() => adicionarMensagem('coach', 'Que evolução, hein! 🚀 Tô orgulhoso do seu progresso. Bora continuar!'), 1200);
+        }
+
+        function abrirCheckin() {
+            checkinEnergia = 3;
+            checkinSono = 3;
+            document.getElementById('ci-peso').value = '';
+            document.getElementById('ci-adesao').value = '';
+            document.getElementById('ci-treinos').value = '';
+            document.getElementById('ci-obs').value = '';
+            document.querySelectorAll('#ci-energia .esc').forEach(b => b.classList.toggle('ativo', b.dataset.val === '3'));
+            document.querySelectorAll('#ci-sono .esc').forEach(b => b.classList.toggle('ativo', b.dataset.val === '3'));
+            abrirModal('modal-checkin');
+        }
+
+        function salvarCheckin() {
+            const peso = parseFloat(document.getElementById('ci-peso').value);
+            const adesao = parseFloat(document.getElementById('ci-adesao').value);
+            const treinos = parseInt(document.getElementById('ci-treinos').value);
+            const obs = document.getElementById('ci-obs').value.trim();
+
+            const checkin = {
+                data: getHoje(), ts: Date.now(),
+                peso: !isNaN(peso) && peso > 0 ? peso : null,
+                energia: checkinEnergia, sono: checkinSono,
+                adesao: !isNaN(adesao) ? adesao : null,
+                treinos: !isNaN(treinos) ? treinos : null,
+                obs
+            };
+            user.checkins.push(checkin);
+
+            if (checkin.peso != null) {
+                const agora = new Date();
+                const hora = `${String(agora.getHours()).padStart(2,'0')}:${String(agora.getMinutes()).padStart(2,'0')}`;
+                user.medidas.push({ data: getHoje(), hora, peso: checkin.peso });
+            }
+
+            salvarUser();
+            fecharModal('modal-checkin');
+            adicionarXP(50, 'Check-in semanal');
+            mostrarToast('📅 Check-in enviado! +50 XP');
+
+            let resposta = `Check-in recebido! 📋 `;
+            if (checkin.energia >= 4 && checkin.sono >= 4) resposta += 'Energia e sono lá em cima, dá pra aumentar a intensidade! 🔥';
+            else if (checkin.energia <= 2) resposta += 'Energia baixa... Vamos pegar mais leve essa semana. 😴';
+            else if (checkin.sono <= 2) resposta += 'Sono ruim atrapalha tudo! Prioriza dormir 7-8h. 😴';
+            else resposta += 'Bom feedback, tá tudo em ordem. Bora continuar! 💪';
+
+            if (checkin.adesao != null) {
+                if (checkin.adesao >= 85) resposta += ` Dieta ${checkin.adesao}% — impecável! 🥗`;
+                else if (checkin.adesao >= 60) resposta += ` Dieta em ${checkin.adesao}%, tá ok mas dá pra apertar. 🥗`;
+                else resposta += ` Dieta em ${checkin.adesao}%... atenção nisso! ⚠️`;
+            }
+
+            setTimeout(() => adicionarMensagem('coach', resposta), 800);
+            renderPlanoPersonal();
+            renderEvolucao();
         }
 
         function trocarTab(tab) {
@@ -1036,13 +2220,39 @@
             document.getElementById('tela-treino').classList.toggle('ativa', tab === 'treino');
             document.getElementById('tela-premium').classList.toggle('ativa', tab === 'premium');
             document.getElementById('tela-personal').classList.toggle('ativa', tab === 'personal');
-            if (tab === 'treino') {
-                diaTreinoAtivo = 0;
-                renderTreino();
-            } else if (tab === 'dash') {
-                atualizarInterface();
+            if (tab === 'treino') { diaTreinoAtivo = 0; renderTreino(); }
+            else if (tab === 'dash') atualizarInterface();
+            else if (tab === 'premium') trocarSubTabPremium(subTabPremiumAtiva);
+            else if (tab === 'personal') {
+                user.mensagensNaoLidas = 0;
+                salvarUser();
+                atualizarBadgePersonal();
+                renderPersonal();
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderPersonal() {
+            const st = getStatusCoach();
+            const stEl = document.getElementById('trainer-status');
+            stEl.textContent = st.label;
+            stEl.className = 'status ' + st.cls;
+            document.getElementById('chat-status').textContent = st.short;
+            document.getElementById('chat-status').style.color = st.cls === 'offline' ? '#8a9bb5' : st.cls === 'treino' ? '#fdcb6e' : '#00d2a0';
+
+            const um = getUltimaMensagem();
+            document.getElementById('trainer-ultima-msg').textContent = um ? `Última mensagem ${tempoRelativo(um.ts)}` : 'Sem mensagens ainda';
+
+            if (user.personalPausadoAte && new Date(user.personalPausadoAte) > new Date(getHoje())) {
+                document.getElementById('personal-banner-sub').textContent = `⏸️ Acompanhamento pausado até ${formatarData(user.personalPausadoAte)}`;
+            } else {
+                document.getElementById('personal-banner-sub').textContent = 'Seu personal trainer está cuidando de você!';
+            }
+
+            renderChat();
+            renderSugestoesChips();
+            renderPlanoPersonal();
+            renderEvolucao();
         }
 
         let toastTimeout = null;
@@ -1057,7 +2267,6 @@
         function acaoRapida(tipo) {
             const hoje = getHoje();
             if (!user.missoesConcluidas[hoje]) user.missoesConcluidas[hoje] = [];
-
             if (tipo === 'agua') {
                 if (user.missoesConcluidas[hoje].includes('agua')) { mostrarToast('⚠️ Você já bebeu água hoje!'); return; }
                 concluirMissao('agua');
@@ -1070,124 +2279,39 @@
             }
         }
 
-        function iniciarApp() {
-            carregarUser();
-
-            if (user.nome !== 'Jogador' || user.xp > 0 || user.nivel > 1) mostrarDash();
-            else mostrarCadastro();
-
-            document.getElementById('btn-cadastrar').addEventListener('click', cadastrar);
-
-            document.querySelectorAll('.tab').forEach(t => {
-                t.addEventListener('click', () => trocarTab(t.dataset.tab));
+        // ============================================================
+        //  NAVEGAÇÃO AUTH
+        // ============================================================
+        function trocarAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => {
+                t.classList.toggle('ativa', t.dataset.auth === tab);
             });
-
-            document.getElementById('btn-abrir-config').addEventListener('click', () => abrirModal('modal-config'));
-            document.getElementById('btn-fechar-config').addEventListener('click', fecharConfig);
-            document.getElementById('btn-resetar').addEventListener('click', resetarProgresso);
-
-            document.getElementById('btn-premium').addEventListener('click', () => abrirModal('modal-premium'));
-            document.getElementById('btn-fechar-premium').addEventListener('click', () => fecharModal('modal-premium'));
-            document.getElementById('btn-assinar').addEventListener('click', () => {
-                user.assinaturaPremium = true;
-                salvarUser();
-                fecharModal('modal-premium');
-                atualizarTabsAssinatura();
-                mostrarToast('⭐ Plano Premium ativado!');
-                setTimeout(() => trocarTab('premium'), 400);
-            });
-
-            document.getElementById('btn-personal').addEventListener('click', () => abrirModal('modal-personal'));
-            document.getElementById('btn-fechar-personal').addEventListener('click', () => fecharModal('modal-personal'));
-            document.getElementById('btn-contratar').addEventListener('click', () => {
-                user.assinaturaPersonal = true;
-                salvarUser();
-                fecharModal('modal-personal');
-                atualizarTabsAssinatura();
-                mostrarToast('🧑‍🏫 Personal contratado!');
-                setTimeout(() => trocarTab('personal'), 400);
-            });
-
-            document.getElementById('btn-cancelar-premium').addEventListener('click', () => {
-                if (confirm('Cancelar assinatura Premium?')) {
-                    user.assinaturaPremium = false;
-                    salvarUser();
-                    atualizarTabsAssinatura();
-                    mostrarToast('Assinatura Premium cancelada');
-                    trocarTab('dash');
-                }
-            });
-
-            document.getElementById('btn-cancelar-personal').addEventListener('click', () => {
-                if (confirm('Cancelar acompanhamento com Personal?')) {
-                    user.assinaturaPersonal = false;
-                    salvarUser();
-                    atualizarTabsAssinatura();
-                    mostrarToast('Acompanhamento cancelado');
-                    trocarTab('dash');
-                }
-            });
-
-            document.getElementById('btn-finalizar-treino').addEventListener('click', () => {
-                const plano = getPlanoAtual();
-                const treino = plano.treinos[diaTreinoAtivo];
-                finalizarTreino(treino.id);
-            });
-
-            document.querySelectorAll('[data-acao]').forEach(btn => {
-                btn.addEventListener('click', function() { acaoRapida(this.dataset.acao); });
-            });
-
-            document.querySelectorAll('.modal-overlay').forEach(modal => {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === this) this.classList.remove('ativo');
-                });
-            });
-
-            setInterval(() => {
-                const hoje = getHoje();
-                if (!user.missoesConcluidas[hoje]) {
-                    user.missoesConcluidas[hoje] = [];
-                    salvarUser();
-                    atualizarInterface();
-                }
-            }, 60000);
+            document.getElementById('auth-login').classList.toggle('ativo', tab === 'login');
+            document.getElementById('auth-cadastro').classList.toggle('ativo', tab === 'cadastro');
         }
 
-        function cadastrar() {
-            const nome = document.getElementById('input-nome').value.trim() || 'Jogador';
-            const objetivo = document.getElementById('input-objetivo').value;
-            const idade = document.getElementById('input-idade').value;
-            const estilo = document.querySelector('input[name="estilo"]:checked').value;
-
-            user.nome = nome;
-            user.objetivo = objetivo;
-            user.idade = idade;
-            user.estilo = estilo;
-            diaTreinoAtivo = 0;
-            salvarUser();
-            mostrarDash();
-            mostrarToast(`🚀 Bem-vindo, ${nome}!`);
+        function mostrarAuth() {
+            document.getElementById('tab-bar').style.display = 'none';
+            document.getElementById('tela-auth').classList.add('ativa');
+            document.getElementById('tela-dash').classList.remove('ativa');
+            document.getElementById('tela-treino').classList.remove('ativa');
+            document.getElementById('tela-premium').classList.remove('ativa');
+            document.getElementById('tela-personal').classList.remove('ativa');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function mostrarDash() {
             document.getElementById('tab-bar').style.display = 'flex';
-            document.getElementById('tela-cadastro').classList.remove('ativa');
+            document.getElementById('tela-auth').classList.remove('ativa');
             document.getElementById('tela-treino').classList.remove('ativa');
             document.getElementById('tela-premium').classList.remove('ativa');
             document.getElementById('tela-personal').classList.remove('ativa');
             document.getElementById('tela-dash').classList.add('ativa');
             document.querySelectorAll('.tab').forEach(t => t.classList.toggle('ativa', t.dataset.tab === 'dash'));
             atualizarInterface();
-        }
-
-        function mostrarCadastro() {
-            document.getElementById('tab-bar').style.display = 'none';
-            document.getElementById('tela-cadastro').classList.add('ativa');
-            document.getElementById('tela-dash').classList.remove('ativa');
-            document.getElementById('tela-treino').classList.remove('ativa');
-            document.getElementById('tela-premium').classList.remove('ativa');
-            document.getElementById('tela-personal').classList.remove('ativa');
+            if (user.assinaturaPersonal) {
+                setTimeout(dispararMensagensProativas, 2500);
+            }
         }
 
         function abrirModal(id) { document.getElementById(id).classList.add('ativo'); }
@@ -1203,17 +2327,218 @@
         }
 
         function resetarProgresso() {
-            if (confirm('Tem certeza que deseja resetar todo o progresso?')) {
-                localStorage.removeItem('levelfit_user');
+            if (confirm('Tem certeza que deseja resetar todo o progresso desta conta?')) {
+                const session = getSession();
+                const email = user.email;
                 user = getDefaultUser();
-                diaTreinoAtivo = 0;
+                user.email = email;
+                user.nome = document.getElementById('cfg-nome')?.textContent || user.nome;
+                const accounts = getAccounts();
+                if (session && accounts[session]) {
+                    // Mantém nome/email
+                    const nomeAntigo = accounts[session].user.nome;
+                    user.nome = nomeAntigo;
+                    accounts[session].user = user;
+                    saveAccounts(accounts);
+                }
                 salvarUser();
                 fecharModal('modal-config');
                 mostrarToast('🔄 Progresso resetado');
-                mostrarCadastro();
-                document.getElementById('input-nome').value = '';
-                document.querySelector('input[name="estilo"][value="animado"]').checked = true;
+                atualizarInterface();
+                trocarTab('dash');
             }
+        }
+
+        function contratarPersonal() {
+            user.assinaturaPersonal = true;
+            user.personalContratadoEm = getHoje();
+            user.mensagensNaoLidas = 0;
+            salvarUser();
+            fecharModal('modal-personal');
+            atualizarTabsAssinatura();
+            mostrarToast('🧑‍🏫 Personal contratado!');
+
+            setTimeout(() => {
+                adicionarMensagem('coach', `Fala ${user.nome}! Sou o Coach Ricardo 🧑‍🏫 Seu novo parceiro de treino. Vamos juntos! Qualquer coisa, me chama aqui no chat. 💪`);
+            }, 500);
+            setTimeout(() => trocarTab('personal'), 400);
+        }
+
+        function cancelarPersonalHumano() {
+            adicionarMensagem('coach', `Ei... vi que quer cancelar. Antes disso: quer PAUSAR por 1 mês em vez de cancelar? Assim você não perde nada e volta quando quiser. 💚`);
+            setTimeout(() => {
+                const quer = confirm('O Coach mandou uma mensagem no chat. Quer pausar por 1 mês em vez de cancelar?');
+                if (quer) abrirModal('modal-pausar-personal');
+                else {
+                    if (confirm('Tem certeza que deseja cancelar o acompanhamento?')) {
+                        adicionarMensagem('coach', 'Entendido. Foi um prazer te acompanhar! Quando quiser voltar, é só chamar. Bons treinos! 💪');
+                        user.assinaturaPersonal = false;
+                        user.mensagensNaoLidas = 0;
+                        salvarUser();
+                        atualizarTabsAssinatura();
+                        mostrarToast('Acompanhamento cancelado');
+                        setTimeout(() => trocarTab('dash'), 900);
+                    }
+                }
+            }, 600);
+        }
+
+        function confirmarPausaPersonal() {
+            const d = new Date(getHoje());
+            d.setDate(d.getDate() + 30);
+            user.personalPausadoAte = d.toISOString().split('T')[0];
+            adicionarMensagem('coach', `Beleza! Vou pausar por 1 mês. Volto em ${formatarData(user.personalPausadoAte)}. Se cuida e não desaparece! 😉`);
+            salvarUser();
+            fecharModal('modal-pausar-personal');
+            mostrarToast('⏸️ Acompanhamento pausado por 1 mês');
+            renderPersonal();
+        }
+
+        function iniciarApp() {
+            const logado = carregarUser();
+
+            // Event listeners
+            // AUTH
+            document.querySelectorAll('.auth-tab').forEach(t => {
+                t.addEventListener('click', () => trocarAuthTab(t.dataset.auth));
+            });
+            document.getElementById('link-ir-cadastro').addEventListener('click', () => trocarAuthTab('cadastro'));
+            document.getElementById('link-ir-login').addEventListener('click', () => trocarAuthTab('login'));
+            document.getElementById('btn-login').addEventListener('click', fazerLogin);
+            document.getElementById('btn-cadastrar').addEventListener('click', criarConta);
+
+            // Login com Enter
+            document.getElementById('login-senha').addEventListener('keydown', e => {
+                if (e.key === 'Enter') fazerLogin();
+            });
+            document.getElementById('login-email').addEventListener('keydown', e => {
+                if (e.key === 'Enter') document.getElementById('login-senha').focus();
+            });
+            document.getElementById('cad-senha').addEventListener('keydown', e => {
+                if (e.key === 'Enter') criarConta();
+            });
+
+            // Tabs principais
+            document.querySelectorAll('.tab').forEach(t => {
+                t.addEventListener('click', () => trocarTab(t.dataset.tab));
+            });
+
+            document.querySelectorAll('#subtabs-premium .subtab').forEach(t => {
+                t.addEventListener('click', () => trocarSubTabPremium(t.dataset.sub));
+            });
+
+            document.getElementById('btn-abrir-config').addEventListener('click', () => abrirModal('modal-config'));
+            document.getElementById('btn-fechar-config').addEventListener('click', fecharConfig);
+            document.getElementById('btn-logout').addEventListener('click', fazerLogout);
+            document.getElementById('btn-resetar').addEventListener('click', resetarProgresso);
+
+            document.getElementById('btn-premium').addEventListener('click', () => abrirModal('modal-premium'));
+            document.getElementById('btn-fechar-premium').addEventListener('click', () => fecharModal('modal-premium'));
+            document.getElementById('btn-assinar').addEventListener('click', () => {
+                user.assinaturaPremium = true;
+                salvarUser();
+                fecharModal('modal-premium');
+                atualizarTabsAssinatura();
+                mostrarToast('⭐ Plano Premium ativado!');
+                setTimeout(() => trocarTab('premium'), 400);
+            });
+
+            document.getElementById('btn-personal').addEventListener('click', () => abrirModal('modal-personal'));
+            document.getElementById('btn-fechar-personal').addEventListener('click', () => fecharModal('modal-personal'));
+            document.getElementById('btn-contratar').addEventListener('click', contratarPersonal);
+
+            document.getElementById('btn-cancelar-premium').addEventListener('click', () => {
+                if (confirm('Cancelar assinatura Premium?')) {
+                    user.assinaturaPremium = false;
+                    salvarUser();
+                    atualizarTabsAssinatura();
+                    mostrarToast('Assinatura Premium cancelada');
+                    trocarTab('dash');
+                }
+            });
+
+            document.getElementById('btn-cancelar-personal').addEventListener('click', cancelarPersonalHumano);
+            document.getElementById('btn-pausar-personal').addEventListener('click', () => abrirModal('modal-pausar-personal'));
+            document.getElementById('btn-fechar-pausa').addEventListener('click', () => fecharModal('modal-pausar-personal'));
+            document.getElementById('btn-confirmar-pausa').addEventListener('click', confirmarPausaPersonal);
+
+            document.getElementById('btn-finalizar-treino').addEventListener('click', () => {
+                const plano = getPlanoAtual();
+                const treino = plano.treinos[diaTreinoAtivo];
+                finalizarTreino(treino.id);
+            });
+
+            document.getElementById('btn-toggle-add-medida').addEventListener('click', abrirFormMedida);
+            document.getElementById('btn-cancelar-medida').addEventListener('click', fecharFormMedida);
+            document.getElementById('btn-salvar-medida').addEventListener('click', salvarMedida);
+
+            document.getElementById('chat-enviar').addEventListener('click', enviarMensagemUsuario);
+            document.getElementById('chat-input').addEventListener('keydown', e => {
+                if (e.key === 'Enter') enviarMensagemUsuario();
+            });
+
+            document.getElementById('qa-checkin').addEventListener('click', abrirCheckin);
+            document.getElementById('qa-ajuste').addEventListener('click', () => {
+                document.getElementById('chat-input').value = 'Pode ajustar meu plano?';
+                enviarMensagemUsuario();
+            });
+            document.getElementById('qa-foto').addEventListener('click', () => {
+                adicionarMensagem('user', '📸 [Foto de evolução enviada]');
+                setTimeout(() => adicionarMensagem('coach', 'Recebi a foto! Tá evoluindo muito bem, shape vindo! 🔥'), 1500);
+            });
+
+            document.querySelectorAll('#ci-energia .esc').forEach(b => {
+                b.addEventListener('click', () => {
+                    checkinEnergia = parseInt(b.dataset.val);
+                    document.querySelectorAll('#ci-energia .esc').forEach(x => x.classList.toggle('ativo', x === b));
+                });
+            });
+            document.querySelectorAll('#ci-sono .esc').forEach(b => {
+                b.addEventListener('click', () => {
+                    checkinSono = parseInt(b.dataset.val);
+                    document.querySelectorAll('#ci-sono .esc').forEach(x => x.classList.toggle('ativo', x === b));
+                });
+            });
+            document.getElementById('btn-salvar-checkin').addEventListener('click', salvarCheckin);
+            document.getElementById('btn-fechar-checkin').addEventListener('click', () => fecharModal('modal-checkin'));
+
+            document.querySelectorAll('[data-acao]').forEach(btn => {
+                btn.addEventListener('click', function() { acaoRapida(this.dataset.acao); });
+            });
+
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) this.classList.remove('ativo');
+                });
+            });
+
+            // Tela inicial
+            if (logado) mostrarDash();
+            else mostrarAuth();
+
+            // Loop de verificação diária
+            setInterval(() => {
+                if (!user || !user.nome) return;
+                const hoje = getHoje();
+                if (!user.missoesConcluidas[hoje]) {
+                    user.missoesConcluidas[hoje] = [];
+                    salvarUser();
+                    atualizarInterface();
+                }
+                if (!user.refeicoesFeitas[hoje]) {
+                    user.refeicoesFeitas[hoje] = [];
+                    salvarUser();
+                }
+                if (!user.refeicoesXP[hoje]) {
+                    user.refeicoesXP[hoje] = [];
+                    salvarUser();
+                }
+                if (document.getElementById('tela-personal').classList.contains('ativa')) {
+                    const st = getStatusCoach();
+                    const stEl = document.getElementById('trainer-status');
+                    if (stEl) { stEl.textContent = st.label; stEl.className = 'status ' + st.cls; }
+                }
+            }, 60000);
         }
 
         document.addEventListener('DOMContentLoaded', iniciarApp);
